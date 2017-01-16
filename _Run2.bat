@@ -1,0 +1,1 @@
+call _RunInstance.bat DWA universum.dl24 20001

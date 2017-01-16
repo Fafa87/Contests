@@ -1,0 +1,94 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading;
+
+
+public class SolverBase
+{
+    protected double timeRemaining;
+    static Random random = new Random();
+    Stopwatch timer = new Stopwatch();
+
+    public SolverBase(double time)
+    {
+        timeRemaining = time;
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+    }
+
+    public virtual void GetData()
+    {
+        throw new NotImplementedException();
+    }
+    public virtual bool Solve()
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual void PrintBest()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RunIterations(Action<RunInfo> go, double timeAvailable, int iterations)
+    {
+        Stopwatch timer = new Stopwatch();
+        double perIteration = 0;
+        double timeLeft = timeAvailable;
+        for (int iteration = 0; iteration < iterations; iteration++)
+        {
+            timer.Start();
+            go(new RunInfo(iteration, timeLeft / (iterations - iteration)));
+            timer.Stop();
+            timeLeft = timeAvailable - timer.ElapsedMilliseconds;
+            perIteration = timer.ElapsedMilliseconds / (iteration + 1);
+
+            if (1.1 * perIteration >= timeLeft)
+                break;
+        }
+    }
+
+    public void RunForTime(Func<RunInfo,bool> go, double timeAvailable)
+    {
+        Stopwatch timer = new Stopwatch();
+        int iterations = 0;
+        double perIteration = 0;
+        double timeLeft = timeAvailable;
+        while (1.5 * perIteration < timeLeft)
+        {
+            timer.Start();
+            var stop = go(new RunInfo(iterations, timeLeft)); // maximal time to take (should take very small part of it)
+            timer.Stop();
+
+            iterations++;
+            timeLeft = timeAvailable - timer.ElapsedMilliseconds;
+            perIteration = timer.ElapsedMilliseconds / iterations;
+
+            if (stop)
+                break;
+        }
+    }
+
+    public void MeasureTime(string name, Action<int> go)
+    {
+        timer.Reset();
+        timer.Start();
+        go(0);
+        timer.Stop();
+        Console.Error.WriteLine(name + ": took {0} ms", timer.ElapsedMilliseconds);
+    }
+}
+
+public struct RunInfo
+{
+    public readonly int seed;
+    public readonly double timeLeft;
+    public RunInfo(int s, double t)
+    {
+        seed = s;
+        timeLeft = t;
+    }
+}

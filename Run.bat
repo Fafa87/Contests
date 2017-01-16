@@ -1,0 +1,1 @@
+@Deadline.exe < Input\%1.in > Output\%1.out

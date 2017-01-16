@@ -1,0 +1,1 @@
+@Deadline.exe < Input\current_test_case.in
