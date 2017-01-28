@@ -103,9 +103,8 @@ public class Point : IEquatable<Point>
     }
 
     public Point(Tuple<double, double> p)
+        : this(p.Item1, p.Item2)
     {
-        X = p.Item1;
-        Y = p.Item2;
     }
 
     //public Point(string data)
@@ -177,7 +176,7 @@ public class Point : IEquatable<Point>
 
     public double Length()
     {
-        return (double)Math.Pow((double)(X * X + Y * Y), 0.5);
+        return Math.Sqrt((double)(X * X + Y * Y));
     }
 
     public bool IsInBoundingBox(Point bbMin, Point bbMax)
@@ -187,13 +186,13 @@ public class Point : IEquatable<Point>
 
     private int CalculateQuarter()
     {
-        if(X>0 && Y >=0)
+        if (X > 0 && Y >= 0)
             return 1;
-        if(X<=0 && Y >0)
+        if (X <= 0 && Y > 0)
             return 2;
-        if(X<0 && Y<=0)
+        if (X < 0 && Y <= 0)
             return 3;
-        if(X>=0 && Y<0)
+        if (X >= 0 && Y < 0)
             return 4;
         return 0;
         //throw new InvalidOperationException("Where are you point?");
@@ -281,7 +280,7 @@ public class Point : IEquatable<Point>
 
 public class Rectangle   
 {
-    public double Top,Bottom,Left,Right;
+    public double Top, Bottom, Left, Right;
     public Rectangle(Point a, Point b)
     {
         Top = Math.Max(a.Y, b.Y);
@@ -321,7 +320,7 @@ public class Rectangle
 
     public bool Inside(Point size)
     {
-        return Left >= 0 && Right < size.X && Bottom >= 0 && Top < size.X;
+        return Left >= 0 && Right < size.X && Bottom >= 0 && Top < size.Y;
     }
 
     public override string ToString()

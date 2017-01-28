@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Combinatorics.cs" />
     <Compile Include="Geometry.cs" />
+    <Compile Include="Geometry3D.cs" />
     <Compile Include="Graphs.cs" />
     <Compile Include="Munkres.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

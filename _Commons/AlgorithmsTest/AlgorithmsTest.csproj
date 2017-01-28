@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="CombinatoricsTest.cs" />
     <Compile Include="CommonsTest.cs" />
+    <Compile Include="Geometry3DTest.cs" />
     <Compile Include="GeometryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

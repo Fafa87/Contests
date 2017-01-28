@@ -58,14 +58,16 @@ namespace Deadline
 
         public static void RunSimulator()
         {
-            var simulatorInfo = new ProcessStartInfo();
-            simulatorInfo.CreateNoWindow = false;
-            simulatorInfo.UseShellExecute = false;
-            simulatorInfo.RedirectStandardOutput = true;
-            simulatorInfo.RedirectStandardError = true;
-            simulatorInfo.WorkingDirectory = "Simulator";
-            simulatorInfo.FileName = "java";
-            simulatorInfo.Arguments = string.Format(@"-jar ""simulator.jar"" --level=..\Input\level{0}.in --tcp=500", GameState.LevelNumber);
+            var simulatorInfo = new ProcessStartInfo()
+            {
+                CreateNoWindow = false,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                WorkingDirectory = "Simulator",
+                FileName = "java",
+                Arguments = string.Format(@"-jar ""simulator.jar"" --level=..\Input\level{0}.in --tcp=500", GameState.LevelNumber)
+            };
             var simulatorProcess = new Process
             {
                 StartInfo = simulatorInfo,
@@ -80,12 +82,14 @@ namespace Deadline
             };
             simulatorProcess.Start();
 
-            var agentInfo = new ProcessStartInfo();
-            agentInfo.CreateNoWindow = true;
-            agentInfo.UseShellExecute = false;
-            agentInfo.FileName = "agent";
-            agentInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            agentInfo.Arguments = string.Format("'Simulator ..\\Input\\level{0}.in'", GameState.LevelNumber).Replace('\'', '"');
+            var agentInfo = new ProcessStartInfo()
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                FileName = "agent",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                Arguments = string.Format("'Simulator ..\\Input\\level{0}.in'", GameState.LevelNumber).Replace('\'', '"')
+            };
             Process.Start(agentInfo);
         }
 

@@ -74,12 +74,14 @@ namespace AlgorithmsTest
             CollectionAssert.AreEqual(new[] { segmentA }, calculator(segments, point).ToList());
 
             // fml
-            var allSegments = new List<LineSegment>();
-            allSegments.Add(new LineSegment(1, 0, 0, 1));
-            allSegments.Add(new LineSegment(0, 1, 0, 2));
-            allSegments.Add(new LineSegment(0, 2, 0, 3));
-            allSegments.Add(new LineSegment(0, 3, -1, 3));
-            allSegments.Add(new LineSegment(-1, 3, -2, 2));
+            var allSegments = new List<LineSegment>
+            {
+                new LineSegment(1, 0, 0, 1),
+                new LineSegment(0, 1, 0, 2),
+                new LineSegment(0, 2, 0, 3),
+                new LineSegment(0, 3, -1, 3),
+                new LineSegment(-1, 3, -2, 2)
+            };
             var visibleSegments = new[] { allSegments[0], allSegments[4] };
             point = new Point(0, 0);
             var results = calculator(allSegments, point).ToList();

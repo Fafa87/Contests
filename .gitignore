@@ -2,3 +2,9 @@ deadline.csproj.user
 *.manifest
 .vs
 testing.v12.suo
+*.pdb
+bin/
+obj/
+Deadline.exe
+Deadline.exe.config
+Algorithms.dll
