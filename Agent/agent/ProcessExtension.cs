@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace agent
 {
-
     public static class ProcessExtensions
     {
         public static Process ParentProcess(this Process process)
@@ -42,7 +41,6 @@ namespace agent
                 return null;
             }
             catch { return null; }
-
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -69,6 +67,5 @@ namespace agent
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
             public string szExeFile;
         }
-
     }
 }

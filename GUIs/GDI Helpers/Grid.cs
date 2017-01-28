@@ -45,7 +45,6 @@ namespace GUIs.GDI_Helpers
 
         public System.Drawing.Point GetCorner(int y, int x)
         {
-
             if (M == 0)
                 M = 1;
             if (N == 0)

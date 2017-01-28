@@ -441,7 +441,7 @@ public class Polygon
         double res = 0;
         for (int i = 0; i < points.Count; i++)
         {
-            int next = (i + 1)% points.Count;
+            int next = (i + 1) % points.Count;
             res += ((points[i].X + points[next].X) * (points[i].Y - points[next].Y));
         }
         if (allowNegative)
@@ -451,6 +451,6 @@ public class Polygon
 
     public override string ToString()
     {
-        return String.Format("Polygon: ({0})", String.Join(";", points.Select(p=>p.ToString()).ToArray()));
+        return String.Format("Polygon: ({0})", String.Join(";", points.Select(p => p.ToString()).ToArray()));
     }
 }
