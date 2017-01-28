@@ -25,10 +25,9 @@ namespace Deadline
 
         public static void RunCase()
         {
-            Solution solver = new Solution(1);
+            Solution solver = new Solution(new IOClient(), 1);
             solver.GetData();
-            solver.Solve();
-            solver.Print();
+            solver.Act();
         }
 
         public static void RunClientWithSimulator()
@@ -37,9 +36,9 @@ namespace Deadline
             RunClient("127.0.0.1", 500);
         }
 
-        public static void RunClient(TCPClient client, Func<TCPClient, TCPSolverBase> newSolver)
+        public static void RunClient(TCPClient client, Func<TCPClient, SolutionBase> newSolver)
         {
-            TCPSolverBase solver = newSolver(client);
+            SolutionBase solver = newSolver(client);
             while (true)
             {
                 solver.GetData();
@@ -52,7 +51,7 @@ namespace Deadline
         {
             var client = new TCPClient(server, port);
             client.Login();
-            RunClient(client, (c) => new TCPSolverBase(client));
+            RunClient(client, (c) => new SolutionBase(client));
             client.Exit();
         }
 
@@ -100,6 +99,7 @@ namespace Deadline
 
             RunNCases();
             // RunClient(args[0], Int32.Parse(args[1]));
+            // RunClientWithSimulator();
         }
     }
 }

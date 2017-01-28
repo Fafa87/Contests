@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Deadline;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -6,30 +7,46 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-
-public class SolverBase
+public class SolutionBase
 {
+    /// <summary>
+    /// In miliseconds.
+    /// </summary>
     protected double timeRemaining;
     static Random random = new Random();
     Stopwatch timer = new Stopwatch();
+    
+    IClient client;
+    TCPClient tcpClient { get { return client as TCPClient; } }
+    IOClient ioClient { get { return client as IOClient; } }
+    protected GameState state;
+    protected Result best;
 
-    public SolverBase(double time)
+    public SolutionBase(IClient client, double time = 0)
     {
-        timeRemaining = time;
+        this.client = client;
+        this.timeRemaining = time;
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
     }
 
     public virtual void GetData()
     {
-        throw new NotImplementedException();
-    }
-    public virtual bool Solve()
-    {
-        throw new NotImplementedException();
+        this.state = new GameState();
+        client.LearnState(state);
     }
 
-    public virtual void PrintBest()
+    protected virtual bool TakeBestAction()
     {
+        return client.TakeAction(best);
+    }
+
+    public virtual bool Act()
+    {
+        // solve problem described in this.state
+        // solution present as Result object
+        // then send results (PrintBest) 
+        //
+        // or talk in a more complicated way to tcp server
         throw new NotImplementedException();
     }
 

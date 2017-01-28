@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace Deadline
 {
-    public partial class TCPClient 
+    public partial class TCPClient : IClient
     {
         #region Get information
 
@@ -26,10 +26,11 @@ namespace Deadline
 
         #region Take actions
 
-        public void TakeAction(Result c)
+        public bool TakeAction(Result c)
         {
             //WriteLineAndFlush("brake " + c.Brake.ToString());
             //WriteLineAndFlush("throttle " + c.Throttle.ToString());
+            return false;
         }
 
         public void Exit()
@@ -41,5 +42,7 @@ namespace Deadline
         }
 
         #endregion
+
+        
     }
 }

@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading;
+using System.Globalization;
 
 namespace AlgorithmsTest
 {
@@ -99,12 +101,21 @@ namespace AlgorithmsTest
             LineSegment segment = new LineSegment(a, b);
             Polygon poly = new Polygon(new[] { a, b, c });
 
+            var culture = CultureInfo.DefaultThreadCurrentCulture;
+            try
+            {
+                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
             Assert.AreEqual("x=1.2 y=2.3", a.ToString());
             Assert.AreEqual("x=1 y=2", ia.ToString());
 
             Assert.AreEqual("1.2 2.6 2.2 2.3", rect.ToString());
             Assert.AreEqual("Segment: (" + a.ToString() + "->" + b.ToString() + ")", segment.ToString());
             Assert.AreEqual("Polygon: (" + a.ToString() + ";" + b.ToString() + ";" + c.ToString() + ")", poly.ToString());
+            }
+            finally
+            {
+                CultureInfo.DefaultThreadCurrentCulture = culture;
+            }
         }
 
         [TestMethod]

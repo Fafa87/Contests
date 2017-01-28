@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Deadline;
 
 namespace DeadlineTest
 {
     [TestClass]
-    public class SolverTest
+    public class SolutionTest
     {
         [TestMethod]
         public void Construction()
         {
-            var sol = new SolverBase(1023.2);
+            var sol = new Solution(new IOClient(), 1023);
         }
 
         [TestMethod]
         public void InvariantCultureTest()
         {
-            var sol = new SolverBase(1023.2);
+            var sol = new Solution(new IOClient(), 1023);
             Assert.AreEqual("1.345", 1.345.ToString());
             Assert.AreEqual("314", 314.0.ToString());
             Assert.AreEqual("31314.3", 31314.3.ToString());

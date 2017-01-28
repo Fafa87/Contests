@@ -6,20 +6,14 @@ using System.Threading.Tasks;
 
 namespace Deadline
 {
-    public class TCPSolverBase
+    public class IOClient : IClient
     {
-        public TCPClient Client;
-        public TCPSolverBase(TCPClient client)
-        {
-            this.Client = client;
-        }
-
-        public virtual void GetData()
+        public void LearnState(GameState game)
         {
             throw new NotImplementedException();
         }
 
-        public virtual bool Act()
+        public bool TakeAction(Result r)
         {
             throw new NotImplementedException();
         }

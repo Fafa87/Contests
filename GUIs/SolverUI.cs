@@ -9,11 +9,11 @@ using Deadline;
 
 namespace GUIs
 {
-    public class SolverUI : TCPSolverBase
+    public class SolverUI : Solution
     {
         public System.Drawing.Point Selected;
         Grid grid;
-        public SolverUI(TCPClient c)
+        public SolverUI(IClient c)
             : base(c)
         {
         }
@@ -27,10 +27,6 @@ namespace GUIs
         {
             try
             {
-                if (base.Client != null)
-                {
-
-                }
                 grid = new Grid(g, s, 10, 10);
                 grid.Draw(Pens.Aqua);
                 grid.FillField(Brushes.Black, 2, 2);
