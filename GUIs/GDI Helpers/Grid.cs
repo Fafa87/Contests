@@ -45,7 +45,6 @@ namespace GUIs.GDI_Helpers
 
         public System.Drawing.Point GetCorner(int y, int x)
         {
-
             if (M == 0)
                 M = 1;
             if (N == 0)
@@ -71,10 +70,11 @@ namespace GUIs.GDI_Helpers
 
         public void DrawText(string text, int y, int x)
         {
-            StringFormat format = new StringFormat();
-            format.LineAlignment = StringAlignment.Center;
-            format.Alignment = StringAlignment.Center;
-
+            StringFormat format = new StringFormat()
+            {
+                LineAlignment = StringAlignment.Center,
+                Alignment = StringAlignment.Center
+            };
             _g.DrawString(text, SystemFonts.CaptionFont, Brushes.Black, GetCorner(x, y).X, GetCorner(x, y).Y);
         }
 

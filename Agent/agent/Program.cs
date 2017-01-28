@@ -32,7 +32,5 @@ namespace agent
                 Thread.Sleep(100);
             } while (true);
         }
-
-       
     }
 }
