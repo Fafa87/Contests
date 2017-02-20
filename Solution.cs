@@ -13,6 +13,11 @@ public class Solution : SolutionBase
     public Solution(IClient client, int time = 0) : base(client, time)
     {}
 
+    public override void GetData()
+    {
+        base.GetData();
+    }
+
     public override bool Act()
     {
         Result real;
@@ -24,6 +29,7 @@ public class Solution : SolutionBase
         //    real = real.PickBetter(best);
         //}
         best = real;
+        TakeBestAction();
         return true;
     }
 

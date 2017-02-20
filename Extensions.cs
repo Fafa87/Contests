@@ -16,8 +16,8 @@ public static class RandomExtensions
 
     public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source, int seed)
     {
-		return source.Randomize(seed);
-	}
+        return source.Randomize(seed);
+    }
 }
 
 public static class DPExtensions

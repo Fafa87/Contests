@@ -1,0 +1,18 @@
+﻿For file based optimisation contest:
+
+1. Prepare GameState class fields and objects.
+
+2a. Read GameState from IOClient or Console.Readline directly. If multiple objects there pass IOClient to then in constructors.
+2b. Read global parameters of the case to World.
+
+3. Prepare Result class fields and split it into Actions taken (prefered).
+4. Write the IOClient TakeAction where it is outputed to Console.Writeline.
+
+5. Write a dummy version and verify that any points are achieve!
+
+------------------------------------------------------------
+
+Write real solution in Solution.cs:
+- use multiples run methods from SolutionBase
+
+GLHF!

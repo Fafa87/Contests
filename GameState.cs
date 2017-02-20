@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
+/// <summary>
+/// Base for objects in game state (such as drones etc.).
+/// </summary>
 abstract class GameStateObject
 {
     public GameState Game;
