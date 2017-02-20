@@ -8,3 +8,5 @@ obj/
 Deadline.exe
 Deadline.exe.config
 Algorithms.dll
+Deadline.vshost.exe
+*.config
