@@ -14,5 +14,13 @@
 
 Write real solution in Solution.cs:
 - use multiples run methods from SolutionBase
+- create results that can be assesed (CalculateQuality)
+
+
+------------------------------------------------------------
+
+For initial debugging setup stdin rediction in Deadline project.
+
+------------------------------------------------------------
 
 GLHF!
