@@ -10,3 +10,6 @@ Deadline.exe.config
 Algorithms.dll
 Deadline.vshost.exe
 *.config
+*.in
+Output/big.out
+*.out

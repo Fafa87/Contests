@@ -35,7 +35,8 @@ namespace Deadline
             Console.OpenStandardInput();
             Console.OpenStandardOutput();
 
-            RunNCases();
+            RunCase();
+            //RunNCases();
             // RunClient(args[0], Int32.Parse(args[1]));
             // RunClientWithSimulator();
         }
