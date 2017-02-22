@@ -28,12 +28,14 @@ public class Result
     public long CalculateQuality()
     {
         Quality = 0;
+        Quality -= Actions.Sum(p=>(long)p.slice.Area);
         return Quality;
     }
 
-    public void FixAndValidate(GameState game)
+    public void FixAndValidate()
     {
         // created result may be invalid so this is an optional safe guard
+        Actions.RemoveAll(p => p.IsValid() == false);
     }
 
     public void Print()
