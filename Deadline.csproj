@@ -89,10 +89,6 @@
   <ItemGroup>
     <Compile Include="Clients\IClient.cs" />
     <Compile Include="Clients\IOClient.cs" />
-    <Compile Include="Clients\TCPClient.Frame.cs">
-      <DependentUpon>TCPClient.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Clients\TCPClient.cs" />
     <Compile Include="Actions.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GameState.cs" />

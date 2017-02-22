@@ -16,16 +16,11 @@ namespace GUIs
         [STAThread]
         static void Main(string[] args)
         {
-            TCPClient client = new TCPClient(args[0], Int32.Parse(args[1]));
-            client.Login();
-
             var thread = new Thread(new ThreadStart(() =>
             {
-                Deadline.Program.RunClient(client, (server) =>
-                    {
-                        solverUI = new SolverUI(server);
-                        return solverUI;
-                    });
+                SolverUI solver = new SolverUI(new IOClient());
+                solver.GetData();
+                solver.Act();
             }));
             thread.Start();
 
