@@ -48,6 +48,6 @@ public class Result
 
     public Result PickBetter(Result other)
     {
-        return CalculateQuality() <= other.CalculateQuality() ? this : other;
+        return CalculateQuality() >= other.CalculateQuality() ? this : other;
     }
 }
