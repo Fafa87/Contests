@@ -31,7 +31,7 @@ public class Result
         return Quality;
     }
 
-    public void FixAndValidate(GameState game)
+    public void FixAndValidate()
     {
         // created result may be invalid so this is an optional safe guard
     }
