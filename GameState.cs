@@ -25,8 +25,9 @@ public class GameState
 {
     public static readonly int LevelNumber = 1;
 
+    public List<List<int>> Rows = new List<List<int>>();
+    public int MinBoth, MaxArea;
     public GameState()
     {
-        //var data = Console.ReadLine().ParseList<int>();
     }
 }

@@ -318,6 +318,11 @@ public class Rectangle
            other.Bottom > this.Top);
     }
 
+    public double Area
+    {
+        get { return (Right - Left) * (Top - Bottom); }
+    }
+
     public bool Inside(Point size)
     {
         return Left >= 0 && Right < size.X && Bottom >= 0 && Top < size.Y;

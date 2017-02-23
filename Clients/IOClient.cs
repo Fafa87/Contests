@@ -10,12 +10,17 @@ namespace Deadline
     {
         public void LearnState(GameState game)
         {
-            throw new NotImplementedException();
+            var data = Console.ReadLine().ParseList<int>();
+            for (int i = 0; i < data[0]; i++)
+                game.Rows.Add(Console.ReadLine().Select(p=>p=='M' ? 0 : 1).ToList());
+            game.MinBoth = data[2];
+            game.MaxArea = data[3];
         }
 
         public bool TakeAction(Result r)
         {
-            throw new NotImplementedException();
+            r.Print();
+            return true;
         }
     }
 }
