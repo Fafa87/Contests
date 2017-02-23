@@ -11,6 +11,7 @@ public class Result
     public long Quality;
     public GameState State;
     public List<SolutionAction> Actions = new List<SolutionAction>();
+    public const long WorstQuality = -1000000000;
 
     public Result(GameState state)
     {
@@ -27,7 +28,7 @@ public class Result
 
     public long CalculateQuality()
     {
-        Quality = 0;
+        Quality = WorstQuality;
         return Quality;
     }
 

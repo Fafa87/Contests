@@ -15,11 +15,15 @@
 Write real solution in Solution.cs:
 - use multiples run methods from SolutionBase
 - create results that can be assesed (CalculateQuality)
-
+- use seeding to try various ideas / randomizations
+- use SaveResultIfBetter(Result r) from IOClient to keep the currently best result for the given input file 
+	-- so THE SOLUTION CAN KEEP CALCULATING FOREVER! And work is not lost upon crash.
 
 ------------------------------------------------------------
 
 For initial debugging setup stdin rediction in Deadline project.
+
+For running solutions use Run.bat test_name or RunAsync.nat test_name - they copy exe so work can go on!
 
 ------------------------------------------------------------
 
