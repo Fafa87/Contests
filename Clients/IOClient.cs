@@ -11,19 +11,16 @@ namespace Deadline
     {
         public void LearnState(GameState game)
         {
-            SaveResultIfBetter(new Result(null));
             throw new NotImplementedException();
         }
 
         public bool TakeAction(Result r)
         {
-            // r.Print()?
             throw new NotImplementedException();
         }
 
         public void SaveResultIfBetter(Result r)
         {
-            r.Quality = 9;
             // take name from executing file
             var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
             var directory = Path.GetDirectoryName(location);
