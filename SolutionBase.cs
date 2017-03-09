@@ -17,7 +17,7 @@ public class SolutionBase
     Stopwatch timer = new Stopwatch();
     
     IClient client;
-    IOClient ioClient { get { return client as IOClient; } }
+    protected IOClient ioClient { get { return client as IOClient; } }
     protected GameState state;
     protected Result best;
 

@@ -10,8 +10,9 @@ using System.Threading;
 
 public class Solution : SolutionBase
 {
-    public Solution(IClient client, int time = 0) : base(client, time)
-    {}
+    public Solution(IClient client, int time = 0)
+        : base(client, time)
+    { }
 
     public override void GetData()
     {
@@ -23,11 +24,12 @@ public class Solution : SolutionBase
         Result real;
         SolveMini(0);
         real = best;
-        //for(int i=1;i<10;i++)
-        //{
-        //    SolveMini(i);
-        //    real = real.PickBetter(best);
-        //}
+        for(int i=1;i<1000000;i++)
+        {
+            SolveMini(i);
+            real = real.PickBetter(best);
+            ioClient.SaveResultIfBetter(real);
+        }
         best = real;
         TakeBestAction();
         return true;

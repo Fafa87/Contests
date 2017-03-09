@@ -1,7 +1,7 @@
-call Run.bat example
+call RunAsync.bat kittens
 
-call Run.bat small
+call RunAsync.bat me_at_the_zoo
 
-call Run.bat medium
+call RunAsync.bat trending_today
 
-call Run.bat big
+call RunAsync.bat videos_worth_spreading

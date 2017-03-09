@@ -16,7 +16,8 @@ public static class RandomExtensions
 
     public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source, int seed)
     {
-        return source.Randomize(seed);
+        Random rnd = new Random(seed);
+        return source.OrderBy<T, int>((item) => rnd.Next());
     }
 }
 
