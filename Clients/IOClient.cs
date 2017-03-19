@@ -50,7 +50,7 @@ namespace Deadline
                 using(var writer = new StreamWriter(newFilePath))
                 {
                     Console.SetOut(writer);
-                    r.Print();
+                    TakeAction(r);
                 }
                 Console.SetOut(stdout);
             }

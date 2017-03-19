@@ -13,7 +13,7 @@ public class SolutionBase
     /// In miliseconds.
     /// </summary>
     protected double timeRemaining;
-    static Random random = new Random();
+    public static Random random = new Random();
     Stopwatch timer = new Stopwatch();
     
     IClient client;

@@ -21,9 +21,17 @@ Write real solution in Solution.cs:
 
 ------------------------------------------------------------
 
+For simplest file based flow:
+
+1. Choose 1 vs multi case in Program.cs (RunCase() or RunNCases())
+2. Implement reading, solving, printing in Solution.Act()
+
+
+------------------------------------------------------------
+
 For initial debugging setup stdin rediction in Deadline project.
 
-For running solutions use Run.bat test_name or RunAsync.nat test_name - they copy exe so work can go on!
+For running solutions use Run.bat test_name or RunAsync.bat test_name - they copy exe so work can go on!
 
 ------------------------------------------------------------
 

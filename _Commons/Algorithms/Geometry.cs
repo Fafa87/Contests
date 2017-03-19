@@ -318,6 +318,13 @@ public class Rectangle
            other.Bottom > this.Top);
     }
 
+    public static Rectangle AsBoundingBox(IEnumerable<GridPoint> points)
+    {
+        return new Rectangle(
+                new Point(points.Max(p => p.X), points.Max(p => p.Y)), new Point(points.Min(p => p.X), points.Min(p => p.Y)));
+
+    }
+
     public double Area
     {
         get { return (Right - Left) * (Top - Bottom); }
