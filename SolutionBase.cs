@@ -21,6 +21,8 @@ public class SolutionBase
     protected GameState state;
     protected Result best;
 
+    public const long INF = long.MaxValue / 10;
+
     public SolutionBase(IClient client, double time = 0)
     {
         this.client = client;
