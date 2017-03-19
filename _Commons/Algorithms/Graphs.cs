@@ -59,6 +59,32 @@ namespace Algorithms
 
     }
 
+    public class UnionFind<T>
+        where T : class
+    {
+        Dictionary<T, T> Parent = new Dictionary<T,T>();
+
+        public T Find(T elem)
+        {
+            if (Parent.ContainsKey(elem) == false)
+                Parent[elem] = elem;
+
+            if (Parent[Parent[elem]] != Parent[elem]) Parent[elem] = Find(Parent[elem]);
+            return Parent[elem];
+        }
+
+        public void Union(T elem1, T elem2)
+        {
+            Parent[Find(elem1)] = Find(elem2);
+        }
+
+        public List<T> Components()
+        {
+            return Parent.Where(p => p.Key == p.Value).Select(p => p.Key).ToList();
+        }
+
+    }
+
     public static class GraphUtils
     {
         public static readonly GridPoint[] STEPS4 = new GridPoint[] { new GridPoint(1, 0), new GridPoint(-1, 0), new GridPoint(0, 1), new GridPoint(0, -1) };

@@ -69,6 +69,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CombinatoricsTest.cs" />
+    <Compile Include="GraphsTest.cs" />
     <Compile Include="CommonsTest.cs" />
     <Compile Include="Geometry3DTest.cs" />
     <Compile Include="GeometryTest.cs" />
