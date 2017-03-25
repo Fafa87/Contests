@@ -91,6 +91,14 @@ namespace AlgorithmsTest
         }
 
         [TestMethod]
+        public void TestRectangle()
+        {
+            Assert.AreEqual(1, new Rectangle(new Point(1, 2), new Point(2, 3)).Area);
+            Assert.AreEqual(4, new Rectangle(new Point(1, 2), new Point(3, 4)).Area);
+            Assert.AreEqual(0, new Rectangle(new Point(1, 2), new Point(3, 2)).Area);
+        }
+
+        [TestMethod]
         public void TestToString()
         {
             Point a = new Point(1.2, 2.3);

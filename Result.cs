@@ -11,6 +11,7 @@ public class Result
     public long Quality;
     public GameState State;
     public List<SolutionAction> Actions = new List<SolutionAction>();
+    public const long WorstQuality = -1000000000;
 
     public Result(GameState state)
     {
@@ -27,11 +28,11 @@ public class Result
 
     public long CalculateQuality()
     {
-        Quality = 0;
+        Quality = WorstQuality;
         return Quality;
     }
 
-    public void FixAndValidate(GameState game)
+    public void FixAndValidate()
     {
         // created result may be invalid so this is an optional safe guard
     }
@@ -48,6 +49,6 @@ public class Result
 
     public Result PickBetter(Result other)
     {
-        return CalculateQuality() <= other.CalculateQuality() ? this : other;
+        return CalculateQuality() >= other.CalculateQuality() ? this : other;
     }
 }
