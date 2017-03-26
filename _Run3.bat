@@ -1,1 +1,0 @@
-call _RunInstance.bat TRZY kieszostwory.pizza 10002

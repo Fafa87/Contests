@@ -13,14 +13,16 @@ public class SolutionBase
     /// In miliseconds.
     /// </summary>
     protected double timeRemaining;
-    static Random random = new Random();
+    public static Random random = new Random();
     Stopwatch timer = new Stopwatch();
     
     IClient client;
-    TCPClient tcpClient { get { return client as TCPClient; } }
-    IOClient ioClient { get { return client as IOClient; } }
+    protected TCPClient tcpClient { get { return client as TCPClient; } }
+    protected IOClient ioClient { get { return client as IOClient; } }
     protected GameState state;
     protected Result best;
+
+    public const long INF = long.MaxValue / 10;
 
     public SolutionBase(IClient client, double time = 0)
     {

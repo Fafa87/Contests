@@ -10,3 +10,9 @@ Deadline.exe.config
 Algorithms.dll
 Deadline.vshost.exe
 *.config
+*.in
+Output/big.out
+*.out
+zip_solution.zip
+deadline.v12.suo
+*.bak

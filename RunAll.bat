@@ -1,20 +1,21 @@
-@ECHO OFF
-REM USAGE: RunAll.bat zad1 test
-REM exe is Deadline.exe
+set name=rocks
 
-set input=input
-set katalog=%input%\%1
-set nazwa=%2
-set startTime=%time%
-set exe=Deadline.exe
+call RunAsync.bat %name%00
+call RunAsync.bat %name%01
 
-echo %katalog%
+call RunAsync.bat %name%02
 
-for /L %%i in (1,1,220) do if exist %katalog%\%nazwa%0%%i.in  %exe% < %katalog%\%nazwa%0%%i.in > %katalog%\%nazwa%0%%i.out
+call RunAsync.bat %name%03
+call RunAsync.bat %name%04
+call RunAsync.bat %name%05
+call RunAsync.bat %name%06
+call RunAsync.bat %name%07
+call RunAsync.bat %name%08
+call RunAsync.bat %name%09
+call RunAsync.bat %name%10
 
-for /L %%i in (1,1,220) do if exist %katalog%\%nazwa%%%i.in  %exe% < %katalog%\%nazwa%%%i.in > %katalog%\%nazwa%%%i.out
+REM ALTERNATIVE USAGE: RunAll.bat nazwa_pliku
+REM exe is Deadline.exe		 +
 
-REM %exe% < %katalog%\busy_day.in > %katalog%\busy_day.out
-
-echo Start Time: %startTime% 
-echo Finish Time: %time%
+REM for /L %%i in (1,1,10) do if exist input\%10%%i.in  Run.bat %10%%i
+REM for /L %%i in (1,1,10) do if exist input\%11%%i.in  Run.bat %11%%i

@@ -16,8 +16,9 @@ public static class RandomExtensions
 
     public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source, int seed)
     {
-		return source.Randomize(seed);
-	}
+        Random rnd = new Random(seed);
+        return source.OrderBy<T, int>((item) => rnd.Next());
+    }
 }
 
 public static class DPExtensions
@@ -29,6 +30,112 @@ public static class DPExtensions
                 table[i, i2] = value;
     }
 
+}
+
+public static class DictExtensions
+{
+    public static TValue GetOrNew<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key)
+        where TValue : new()
+    {
+        if (!dict.ContainsKey(key))
+            dict[key] = new TValue();
+        return dict[key];
+    }
+
+    public static TValue GetOrNew<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> creator)
+    {
+        if (!dict.ContainsKey(key))
+            dict[key] = creator();
+        return dict[key];
+    }
+
+    public static TValue GetOrNew<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TKey, TValue> creator)
+    {
+        if (!dict.ContainsKey(key))
+            dict[key] = creator(key);
+        return dict[key];
+    }
+
+    public static bool ContainsAllKeys<TKey, TValue>(this Dictionary<TKey, TValue> dict, IEnumerable<TKey> keys)
+    {
+        return keys.All(key => dict.ContainsKey(key));
+    }
+
+    public static void Increment<TKey>(this Dictionary<TKey, int> dict, TKey key, int step)
+    {
+        if (dict.ContainsKey(key) == false)
+            dict[key] = step;
+        else
+            dict[key] = dict[key] + step;
+    }
+
+    public static void Increment<TKey>(this Dictionary<TKey, int> dest, Dictionary<TKey, int> source)
+    {
+        foreach (KeyValuePair<TKey, int> pair in source)
+        {
+            dest.Increment(pair.Key, pair.Value);
+        }
+    }
+
+    public static Dictionary<TKey, int> Summate<TKey>(this Dictionary<TKey, int> dict0, Dictionary<TKey, int> dict1)
+    {
+        var result = new Dictionary<TKey, int>(dict0);
+        result.Increment(dict1);
+        return result;
+    }
+
+    public static void Increment<TKey>(this Dictionary<TKey, double> dict, TKey key, double step)
+    {
+        if (dict.ContainsKey(key) == false)
+            dict[key] = step;
+        else
+            dict[key] = dict[key] + step;
+    }
+
+    public static void AppendItem<TKey, TValue>(this Dictionary<TKey, List<TValue>> dict, TKey key, TValue item)
+    {
+        if (dict.ContainsKey(key) == false)
+        {
+            var newList = new List<TValue>();
+            newList.Add(item);
+            dict[key] = newList;
+        }
+        else
+            dict[key].Add(item);
+    }
+
+    public static List<TValue> GetOrEmpty<TKey, TValue>(this Dictionary<TKey, List<TValue>> dict, TKey key)
+    {
+        List<TValue> res;
+        if (dict.TryGetValue(key, out res) == false)
+            res = new List<TValue>();
+        return res;
+    }
+
+    public static TValue[] GetOrEmpty<TKey, TValue>(this Dictionary<TKey, TValue[]> dict, TKey key)
+    {
+        TValue[] res;
+        if (dict.TryGetValue(key, out res) == false)
+            res = new TValue[0];
+        return res;
+    }
+
+    public static TValue GetOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key)
+        where TValue : class
+    {
+        TValue res;
+        if (dict.TryGetValue(key, out res) == false)
+            res = null;
+        return res;
+    }
+
+    public static TValue GetOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue value)
+    {
+        TValue res;
+        if (dict.TryGetValue(key, out res) == false)
+            res = value;
+        return res;
+    }
 }
 
 public static class ClientExtensions
@@ -45,7 +152,7 @@ public static class ClientExtensions
     {
         List<T> res = new List<T>();
         var tokens = line.Split(' ');
-        foreach(var token in tokens)
+        foreach (var token in tokens)
         {
             res.Add(token.ParseAllTokens<T>());
         }
@@ -65,7 +172,7 @@ public static class ClientExtensions
         T2 res2;
         line = line.ParseToken(out res1);
         line = line.ParseToken(out res2);
-        return Tuple.Create(res1,res2);
+        return Tuple.Create(res1, res2);
     }
 
     public static Tuple<T1, T2, T3> ParseAllTokens<T1, T2, T3>(this string line)

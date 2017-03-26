@@ -1,0 +1,38 @@
+﻿For file based optimisation contest:
+
+1. Prepare GameState class fields and objects.
+
+2a. Read GameState from IOClient or Console.Readline directly. If multiple objects there pass IOClient to then in constructors.
+2b. Read global parameters of the case to World.
+
+3. Prepare Result class fields and split it into Actions taken (prefered).
+4. Write the IOClient TakeAction where it is outputed to Console.Writeline. Can use Result.Print().
+
+5. Write a dummy version and verify that any points are achieve!
+
+------------------------------------------------------------
+
+Write real solution in Solution.cs:
+- use multiples run methods from SolutionBase
+- create results that can be assesed (CalculateQuality)
+- use seeding to try various ideas / randomizations
+- use SaveResultIfBetter(Result r) from IOClient to keep the currently best result for the given input file 
+	-- so THE SOLUTION CAN KEEP CALCULATING FOREVER! And work is not lost upon crash.
+
+------------------------------------------------------------
+
+For simplest file based flow:
+
+1. Choose 1 vs multi case in Program.cs (RunCase() or RunNCases())
+2. Implement reading, solving, printing in Solution.Act()
+
+
+------------------------------------------------------------
+
+For initial debugging setup stdin rediction in Deadline project.
+
+For running solutions use Run.bat test_name or RunAsync.bat test_name - they copy exe so work can go on!
+
+------------------------------------------------------------
+
+GLHF!
