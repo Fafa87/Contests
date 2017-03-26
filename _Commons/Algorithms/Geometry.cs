@@ -33,6 +33,48 @@ public static class GeometryUtils
         return Math.Abs(res) / 2;
     }
 
+    /// <summary>
+    /// Computes cross product (a->b)*(a->c)
+    /// </summary>
+    public static double CrossProd(Point a, Point b, Point c)
+    {
+        return (b.X - a.X) * (c.Y - a.Y) - (b.Y - a.Y) * (c.X - a.X);
+    }
+
+    /// <summary>
+    /// Computes convex hull using Andrew's monotone chain convex hull algorithm
+    /// </summary>
+    public static List<Point> ConvexHull(IEnumerable<Point> points)
+    {
+        if (!points.Any())
+            return new List<Point>();
+
+        var result = new List<Point>();
+
+        var pointsSorted = points.OrderBy(a => a, new Point.PointLexicographicalComparer()).ToList();
+
+        // Build lower hull
+        for (int i = 0; i < pointsSorted.Count; i++)
+        {
+            while (result.Count > 1 && CrossProd(result[result.Count - 2], result[result.Count - 1], pointsSorted[i]) <= 0)
+                result.RemoveAt(result.Count - 1);
+            result.Add(pointsSorted[i]);
+        }
+
+        // Build upper hull
+        int m = result.Count;
+        for (int i = pointsSorted.Count - 2; i >= 0; i--)
+        {
+            while (result.Count > m && CrossProd(result[result.Count - 2], result[result.Count - 1], pointsSorted[i]) <= 0)
+                result.RemoveAt(result.Count - 1);
+            result.Add(pointsSorted[i]);
+        }
+
+        // Remove the last point, as it has been added twice to the hull
+        result.RemoveAt(result.Count - 1);
+
+        return result;
+    }
 }
 
 public struct GridPoint
@@ -81,17 +123,16 @@ public struct GridPoint
         return Math.Abs(X) + Math.Abs(Y);
     }
 
-    public int EuclidianDistance(GridPoint b)
+    public int EuclideanDistance(GridPoint b)
     {
         int deltaX = X - b.X;
         int deltaY = Y - b.Y;
         return (int)Math.Ceiling(Math.Sqrt(deltaX * deltaX + deltaY * deltaY));
     }
-
 }
 
 
-public class Point : IEquatable<Point>
+public class Point : IEquatable<Point>, IComparable<Point>
 {
     public double X, Y;
     public readonly int Quarter;
@@ -149,6 +190,21 @@ public class Point : IEquatable<Point>
         return ScalarMult(b) / this.Length() / b.Length();
     }
 
+    public int CompareTo(Point other)
+    {
+        if (X < other.X)
+            return -1;
+        if (X > other.X)
+            return 1;
+
+        if (Y < other.Y)
+            return -1;
+        if (Y > other.Y)
+            return 1;
+
+        return 0;
+    }
+
     public override String ToString()
     {
         return String.Format("x={0} y={1}", X, Y);
@@ -181,7 +237,8 @@ public class Point : IEquatable<Point>
 
     public bool IsInBoundingBox(Point bbMin, Point bbMax)
     {
-        return bbMin.X <= this.X && this.X <= bbMax.X && bbMin.Y <= this.Y && this.Y <= bbMax.Y;
+        return bbMin.X <= this.X && this.X <= bbMax.X
+            && bbMin.Y <= this.Y && this.Y <= bbMax.Y;
     }
 
     private int CalculateQuarter()
@@ -264,7 +321,6 @@ public class Point : IEquatable<Point>
 
     public class EqualityComparer : IEqualityComparer<Point>
     {
-
         public bool Equals(Point x, Point y)
         {
             return x.X == y.X && x.Y == y.Y;
@@ -274,7 +330,24 @@ public class Point : IEquatable<Point>
         {
             return (int)x.X ^ (int)x.Y;
         }
+    }
 
+    public class PointLexicographicalComparer : Comparer<Point>
+    {
+        public override int Compare(Point a, Point b)
+        {
+            if (a.X < b.X)
+                return -1;
+            if (a.X > b.X)
+                return 1;
+
+            if (a.Y < b.Y)
+                return -1;
+            if (a.Y > b.Y)
+                return 1;
+
+            return 0;
+        }
     }
 }
 
@@ -346,8 +419,8 @@ public class LineSegment
     public readonly Point a, b;
     public readonly Rectangle Box;
 
-    public LineSegment(double x1, double y1, double x2, double y2) : this(new Point(x1,y1), new Point(x2,y2))
-    {}
+    public LineSegment(double x1, double y1, double x2, double y2) : this(new Point(x1, y1), new Point(x2, y2))
+    { }
 
     public LineSegment(Point a, Point b)
     {
@@ -430,7 +503,7 @@ public class Polygon
         get { return points.Count; }
     }
 
-    public IList<LineSegment> GetLineSegments()
+    public List<LineSegment> GetLineSegments()
     {
         List<LineSegment> lines = new List<LineSegment>();
         for (int i = 0; i < n; i++)

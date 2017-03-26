@@ -1,9 +1,9 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 using System.Collections.Generic;
-using System.Threading;
 using System.Globalization;
+using System.Linq;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AlgorithmsTest
 {
@@ -18,6 +18,26 @@ namespace AlgorithmsTest
         }
 
         [TestMethod]
+        public void ConvexHull()
+        {
+            var emptyCollection = new Point[0];
+            CollectionAssert.AreEqual(emptyCollection, GeometryUtils.ConvexHull(emptyCollection));
+
+            var triangle = new[] { new Point(3, 2), new Point(4, 3), new Point(4, 0) };
+            CollectionAssert.AreEquivalent(triangle, GeometryUtils.ConvexHull(triangle));
+
+            var square = new[] { new Point(0, 0), new Point(0, 100), new Point(100, 100), new Point(100, 0) };
+            CollectionAssert.AreEquivalent(square, GeometryUtils.ConvexHull(square));
+
+            var triangleWithColinearPoint = new[] { new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(1, 3) };
+            var triangleWithColinearPointHull = new[] { new Point(1, 1), new Point(3, 3), new Point(1, 3) };
+            TestUtils.AreEquivalent(triangleWithColinearPointHull, GeometryUtils.ConvexHull(triangleWithColinearPoint),
+                new Point.PointLexicographicalComparer());
+
+            // TODO: better test: polygon with something added inside
+        }
+
+        [TestMethod]
         public void PolygonConvexArea()
         {
             Polygon square = new Polygon(new[] { new Point(0, 0), new Point(0, 100), new Point(100, 100), new Point(100, 0) });
@@ -26,7 +46,7 @@ namespace AlgorithmsTest
             Polygon kickedRect = new Polygon(new[] { new Point(0, 0), new Point(0, 200), new Point(150, 300), new Point(150, 100) });
             Assert.AreEqual(150 * 200, kickedRect.Area());
 
-            Polygon triangle = new Polygon(new[] { new Point(0, 0), new Point(0, 100), new Point(100, 100)});
+            Polygon triangle = new Polygon(new[] { new Point(0, 0), new Point(0, 100), new Point(100, 100) });
             Assert.AreEqual(100 * 100 / 2, triangle.Area());
 
             Polygon rectMorePoints = new Polygon(new[] { new Point(0, 0), new Point(100, 0), new Point(200, 0), new Point(200, 100), new Point(100, 100), new Point(0, 100) });
@@ -36,8 +56,8 @@ namespace AlgorithmsTest
         [TestMethod]
         public void PolygonComplexArea()
         {
-            
-            Polygon hat = new Polygon(new[] {  new Point(1, 1), new Point(0, 2), new Point(-1, 1) });
+
+            Polygon hat = new Polygon(new[] { new Point(1, 1), new Point(0, 2), new Point(-1, 1) });
             Assert.AreEqual(1 * 1 * 1, hat.Area());
 
             Polygon roof = new Polygon(new[] { new Point(0, 0), new Point(0, 100), new Point(100, 100), new Point(0, 200), new Point(-100, 100) });
@@ -48,7 +68,7 @@ namespace AlgorithmsTest
         private void Quarter_CheckPoint(int x, int y, int expected)
         {
             var point = new Point(x, y);
-            Assert.AreEqual(expected,point.Quarter);
+            Assert.AreEqual(expected, point.Quarter);
         }
 
         [TestMethod]
@@ -113,12 +133,12 @@ namespace AlgorithmsTest
             try
             {
                 CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-            Assert.AreEqual("x=1.2 y=2.3", a.ToString());
-            Assert.AreEqual("x=1 y=2", ia.ToString());
+                Assert.AreEqual("x=1.2 y=2.3", a.ToString());
+                Assert.AreEqual("x=1 y=2", ia.ToString());
 
-            Assert.AreEqual("1.2 2.6 2.2 2.3", rect.ToString());
-            Assert.AreEqual("Segment: (" + a.ToString() + "->" + b.ToString() + ")", segment.ToString());
-            Assert.AreEqual("Polygon: (" + a.ToString() + ";" + b.ToString() + ";" + c.ToString() + ")", poly.ToString());
+                Assert.AreEqual("1.2 2.6 2.2 2.3", rect.ToString());
+                Assert.AreEqual("Segment: (" + a.ToString() + "->" + b.ToString() + ")", segment.ToString());
+                Assert.AreEqual("Polygon: (" + a.ToString() + ";" + b.ToString() + ";" + c.ToString() + ")", poly.ToString());
             }
             finally
             {
