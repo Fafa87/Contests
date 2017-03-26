@@ -22,9 +22,37 @@ public class Point3D : IEquatable<Point3D>
     {
     }
 
+    public double Distance(Point3D b)
+    {
+        Point3D newPoint = new Point3D(X - b.X, Y - b.Y, Z - b.Z);
+        return newPoint.Length();
+    }
+
+    public void Normalize()
+    {
+        var len = Length();
+        X /= len;
+        Y /= len;
+        Z /= len;
+    }
+
+    public Point3D Normalized()
+    {
+        Point3D newPoint = new Point3D(X, Y, Z);
+        newPoint.Normalize();
+        return newPoint;
+    }
+
     public double Length()
     {
         return Math.Sqrt((double)(X * X + Y * Y + Z * Z));
+    }
+
+    public bool IsInBoundingBox(Point3D bbMin, Point3D bbMax)
+    {
+        return bbMin.X <= X && X <= bbMax.X
+            && bbMin.Y <= Y && Y <= bbMax.Y
+            && bbMin.Z <= Z && Z <= bbMax.Z;
     }
 
     public bool Equals(Point3D other)
