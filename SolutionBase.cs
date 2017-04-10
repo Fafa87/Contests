@@ -55,7 +55,6 @@ public class SolutionBase
     public void RunIterations(Action<RunInfo> go, double timeAvailable, int iterations)
     {
         Stopwatch timer = new Stopwatch();
-        double perIteration = 0;
         double timeLeft = timeAvailable;
         for (int iteration = 0; iteration < iterations; iteration++)
         {
@@ -63,7 +62,7 @@ public class SolutionBase
             go(new RunInfo(iteration, timeLeft / (iterations - iteration)));
             timer.Stop();
             timeLeft = timeAvailable - timer.ElapsedMilliseconds;
-            perIteration = timer.ElapsedMilliseconds / (iteration + 1);
+            double perIteration = timer.ElapsedMilliseconds / (iteration + 1);
 
             if (1.1 * perIteration >= timeLeft)
                 break;
@@ -103,11 +102,11 @@ public class SolutionBase
 
 public struct RunInfo
 {
-    public readonly int seed;
-    public readonly double timeLeft;
+    public readonly int Seed;
+    public readonly double TimeLeft;
     public RunInfo(int s, double t)
     {
-        seed = s;
-        timeLeft = t;
+        Seed = s;
+        TimeLeft = t;
     }
 }

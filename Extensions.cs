@@ -33,7 +33,6 @@ namespace Deadline
                 for (int i2 = 0; i2 <= maxM; i2++)
                     table[i, i2] = value;
         }
-
     }
 
     public static class DictExtensions
@@ -62,7 +61,7 @@ namespace Deadline
 
         public static bool ContainsAllKeys<TKey, TValue>(this Dictionary<TKey, TValue> dict, IEnumerable<TKey> keys)
         {
-            return keys.All(key => dict.ContainsKey(key));
+            return keys.All(dict.ContainsKey);
         }
 
         public static void Increment<TKey>(this Dictionary<TKey, int> dict, TKey key, int step)
@@ -100,8 +99,7 @@ namespace Deadline
         {
             if (dict.ContainsKey(key) == false)
             {
-                var newList = new List<TValue>();
-                newList.Add(item);
+                var newList = new List<TValue> {item};
                 dict[key] = newList;
             }
             else
@@ -146,8 +144,7 @@ namespace Deadline
     {
         public static void Swap<T>(ref T left, ref T right)
         {
-            T temp;
-            temp = left;
+            T temp = left;
             left = right;
             right = temp;
         }
@@ -194,22 +191,22 @@ namespace Deadline
         {
             var all = line.Split(' ');
             var head = all.First();
-            var tail = String.Join(" ", all.Skip(1).ToArray());
+            var tail = string.Join(" ", all.Skip(1).ToArray());
             if (typeof(T) == typeof(string))
             {
                 parsed = (T)(object)head;
             }
             else if (typeof(T) == typeof(decimal))
             {
-                parsed = (T)(object)Decimal.Parse(head, CultureInfo.InvariantCulture);
+                parsed = (T)(object)decimal.Parse(head, CultureInfo.InvariantCulture);
             }
             else if (typeof(T) == typeof(double))
             {
-                parsed = (T)(object)Double.Parse(head, CultureInfo.InvariantCulture);
+                parsed = (T)(object)double.Parse(head, CultureInfo.InvariantCulture);
             }
             else if (typeof(T) == typeof(int))
             {
-                parsed = (T)(object)Int32.Parse(head, CultureInfo.InvariantCulture);
+                parsed = (T)(object)int.Parse(head, CultureInfo.InvariantCulture);
             }
             else if (typeof(T) == typeof(long))
             {
@@ -226,7 +223,7 @@ namespace Deadline
 
         public static string OutputLine(params object[] data)
         {
-            return String.Join(" ", data.Select(d => d.ToString()));
+            return string.Join(" ", data.Select(d => d.ToString()));
         }
 
         public static IEnumerable<Tuple<int, T>> WithIndex<T>(this IEnumerable<T> collection)
@@ -269,7 +266,6 @@ namespace Deadline
             var minimum = collection.Max();
             return collection.First(p => p == minimum);
         }
-
     }
 }
 
