@@ -34,7 +34,6 @@ namespace Deadline
         /// Processes actions. Returns list of actions which have been processed and list of ignored actions.
         /// Move to the next event
         /// </summary>
-        /// <param name="actions"></param>
         public Tuple<List<Action>, List<Action>> NextTurn(List<Action> actions, bool processAllInGivenOrder = false)
         {
             var actionsIgnored = new List<Action>();

@@ -55,14 +55,19 @@ namespace Algorithms
 
         public static GridPoint Move(this Moves4 d, GridPoint point)
         {
-            if (d == Moves4.Up)
-                return new GridPoint(point.X, point.Y - 1);
-            if (d == Moves4.Down)
-                return new GridPoint(point.X, point.Y + 1);
-            if (d == Moves4.Left)
-                return new GridPoint(point.X - 1, point.Y);
-
-            return new GridPoint(point.X + 1, point.Y);
+            switch (d)
+            {
+                case Moves4.Up:
+                    return new GridPoint(point.X, point.Y - 1);
+                case Moves4.Down:
+                    return new GridPoint(point.X, point.Y + 1);
+                case Moves4.Left:
+                    return new GridPoint(point.X - 1, point.Y);
+                case Moves4.Right:
+                    return new GridPoint(point.X + 1, point.Y);
+                default:
+                    throw new ArgumentException("Unsupported move: " + d);
+            }
         }
     }
 }

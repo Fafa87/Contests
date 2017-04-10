@@ -24,7 +24,7 @@ namespace Deadline
         #region Settings
 
         public bool _exceptions = true;
-        public bool _showCommunitation = true;
+        public bool _showCommunication = true;
 
         #endregion
 
@@ -52,7 +52,6 @@ namespace Deadline
             {
                 try
                 {
-
                     _client = new TcpClient(_hostname, _port);
                     logged = 1;
                 }
@@ -117,15 +116,17 @@ namespace Deadline
 
         protected string ReadLine()
         {
-            var line = _reader.ReadLine().Trim();
-            if (_showCommunitation)
+            var line = _reader.ReadLine()?.Trim();
+            if (line == null)
+                throw new IOException("null in ReadLine. Connection is probably closed.");
+            if (_showCommunication)
                 Console.Out.WriteLine(line);
             return line;
         }
 
         protected void WriteLineAndFlush(string text)
         {
-            if (_showCommunitation)
+            if (_showCommunication)
                 Console.Out.WriteLine(text);
             _writer.WriteLine(text);
             _writer.Flush();
@@ -139,7 +140,9 @@ namespace Deadline
             IsAccepted();
             do
             {
-                line = _reader.ReadLine().Trim();
+                line = _reader.ReadLine()?.Trim();
+                if (line == null)
+                    throw new IOException("null in ReadLine. Connection is probably closed.");
             } while (line != "OK");
         }
 

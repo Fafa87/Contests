@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
+using System.Threading;
 using Deadline;
 
 
@@ -55,6 +56,23 @@ namespace Deadline
             client.Exit();
         }
 
+        public static void RunClientAndRestartAutomatically(string server, int port)
+        {
+            while (true)
+            {
+                try
+                {
+                    RunClient(server, port);
+                }
+                catch (IOException e)
+                {
+                    Console.Error.WriteLine("Error occured: " + e.Message);
+                    Console.Error.WriteLine("Will try to reconnect");
+                }
+                Thread.Sleep(1000); // wait one second, not to spam server in case of errors
+            }
+        }
+
         public static void RunSimulator()
         {
             var simulatorInfo = new ProcessStartInfo()
@@ -100,6 +118,7 @@ namespace Deadline
             RunCase();
             //RunNCases();
             // RunClient(args[0], Int32.Parse(args[1]));
+            // RunClientAndRestartAutomatically(args[0], Int32.Parse(args[1]));
             // RunClientWithSimulator();
         }
     }
