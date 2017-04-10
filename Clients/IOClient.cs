@@ -45,7 +45,7 @@ namespace Deadline
                     File.Delete(oldFilePath);
 
 
-                var newFilePath = Path.Combine(resultDirectory, r.Quality.ToString() + ".txt");
+                var newFilePath = Path.Combine(resultDirectory, r.Quality + ".txt");
                 var stdout = Console.Out;
                 using(var writer = new StreamWriter(newFilePath))
                 {
