@@ -116,9 +116,10 @@ namespace Deadline
 
         protected string ReadLine()
         {
-            var line = _reader.ReadLine()?.Trim();
+            var line = _reader.ReadLine();
             if (line == null)
                 throw new IOException("null in ReadLine. Connection is probably closed.");
+            line = line.Trim();
             if (_showCommunication)
                 Console.Out.WriteLine(line);
             return line;
@@ -140,9 +141,10 @@ namespace Deadline
             IsAccepted();
             do
             {
-                line = _reader.ReadLine()?.Trim();
+                line = _reader.ReadLine();
                 if (line == null)
                     throw new IOException("null in ReadLine. Connection is probably closed.");
+                line = line.Trim();
             } while (line != "OK");
         }
 
