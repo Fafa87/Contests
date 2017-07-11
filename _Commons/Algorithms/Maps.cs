@@ -39,6 +39,18 @@ namespace Algorithms
         {
             get { return this[0].Count; }
         }
+
+        public T this[GridPoint point]
+        {
+            get
+            {
+                return this[point.Y][point.X];
+            }
+            set
+            {
+                this[point.Y][point.X] = value;
+            }
+        }
     }
 
     public enum Moves4

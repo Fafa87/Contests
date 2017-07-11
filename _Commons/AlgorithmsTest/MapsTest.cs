@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Collections.Generic;
@@ -27,6 +28,11 @@ namespace AlgorithmsTest
             Assert.AreEqual(true, map2[1][0]);
             Assert.AreEqual(true, map2[1][1]);
             Assert.AreEqual(false, map2[1][2]);
+
+            var point = new GridPoint(2,1);
+            Assert.AreEqual(false, map2[point]);
+            map2[point] = true;
+            Assert.AreEqual(true, map2[point]);
         }
     }
 }
