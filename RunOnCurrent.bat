@@ -1,1 +1,0 @@
-call Run.bat example
