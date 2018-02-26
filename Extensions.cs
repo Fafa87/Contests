@@ -152,7 +152,7 @@ namespace Deadline
         public static List<T> ParseList<T>(this string line)
         {
             List<T> res = new List<T>();
-            var tokens = line.Split(' ');
+            var tokens = line.Trim().Split(' ');
             foreach (var token in tokens)
             {
                 res.Add(token.ParseAllTokens<T>());
