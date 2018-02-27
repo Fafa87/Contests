@@ -6,6 +6,6 @@
 
 rd /S /Q Run\%RUNNAME%
 
-xcopy /I /E %OUT% Run\%RUNNAME%
+xcopy /Y /I /E %OUT% Run\%RUNNAME%
 
 @start "%RUNNAME%" Run\%RUNNAME%\%EXE% %HOST% %PORT%

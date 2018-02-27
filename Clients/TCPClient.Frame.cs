@@ -133,6 +133,14 @@ namespace Deadline
             _writer.Flush();
         }
 
+        public Tuple<int, bool> TurnLeftIsNewGame()
+        {
+            WriteLineAndFlush("TURNS_LEFT");
+            IsAccepted();
+            var res = _reader.ReadLine().Trim().ParseAllTokens<int,int>();
+            return Tuple.Create(res.Item1, res.Item2 == 1);
+        }
+
         public virtual void Wait()
         {
             string line = "";
@@ -142,9 +150,13 @@ namespace Deadline
             do
             {
                 line = _reader.ReadLine();
+                if (line != null)
+                    line = line.Trim();
                 if (line == null)
-                    throw new IOException("null in ReadLine. Connection is probably closed.");
-                line = line.Trim();
+                {
+                    Console.Out.WriteLine("null in ReadLine. Connection is probably closed. Trying to login again.");
+                    Login();
+                }
             } while (line != "OK");
         }
 

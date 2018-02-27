@@ -19,6 +19,7 @@ public class SolutionBase
     IClient client;
     protected TCPClient tcpClient { get { return client as TCPClient; } }
     protected IOClient ioClient { get { return client as IOClient; } }
+    protected World World; // global constants of a container for a number of state (if many games going concurrently)
     protected GameState state;
     protected Result best;
 
@@ -31,10 +32,15 @@ public class SolutionBase
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
     }
 
+    public void Restart()
+    {
+        World = null;
+    }
+
     public virtual void GetData()
     {
-        this.state = new GameState();
-        client.LearnState(state);
+    //    this.state = new GameState();
+    //    client.LearnState(state);
     }
 
     protected virtual bool TakeBestAction()

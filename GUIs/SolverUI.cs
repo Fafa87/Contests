@@ -13,6 +13,8 @@ namespace GUIs
     {
         public System.Drawing.Point Selected;
         Grid grid;
+        View view;
+
         public SolverUI(IClient c)
             : base(c)
         {
