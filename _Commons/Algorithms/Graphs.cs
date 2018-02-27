@@ -5,11 +5,14 @@ using System.Text;
 
 namespace Algorithms
 {
+    // There is QuickGraph library which should be used if possible.
+    // In this file we will create a simpler version for contest where it is forbidden to use external dlls.
+
     // TODO propose a nice and clean and generic way to create graph for graph algorithms (composition, interface whatever)
     // below code is not good nor finished
     // TODO generyczny BFS, DFS, DIJKSTRA
     // Oparty na funkcjach? (albo implementacji interfejsu)
-    // GetNeighbours(node), IsVisited(node), SetVisited(node), SetDistance(node, val) 
+    // GetNeighbours(node), IsVisited(node), SetVisited(node), SetDistance(node, val)
 
     public class Edge<TData> // bidirectional edge
     {
