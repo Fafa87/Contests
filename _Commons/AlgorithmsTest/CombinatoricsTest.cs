@@ -73,5 +73,26 @@ namespace AlgorithmsTest
                 }
             }
         }
+
+        [TestMethod]
+        public void BitTest()
+        {
+            int k1 = Convert.ToInt32("01101101", 2);
+            Assert.AreEqual(1, k1.Bit(0));
+            Assert.AreEqual(0, k1.Bit(1));
+            Assert.AreEqual(1, k1.Bit(2));
+            Assert.AreEqual(1, k1.Bit(3));
+            Assert.AreEqual(0, k1.Bit(4));
+
+            int k2 = Convert.ToInt32("10010010", 2);
+            Assert.AreEqual(k1.BitInvert(8), k2);
+            Assert.AreEqual(k1.BitInvert(8).BitInvert(8), k1);
+            Assert.AreEqual(k2.BitInvert(8).BitInvert(8), k2);
+
+            int k3 = k2.BitFlip(0);
+            k3 = k3.BitFlip(4);
+            int expect_k3 = Convert.ToInt32("10000011", 2);
+            Assert.AreEqual(expect_k3, k3);
+        }
     }
 }

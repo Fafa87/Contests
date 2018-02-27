@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Algorithms
 {
-    public class Combinatorics
+    public static class Combinatorics
     {
         // code from http://stackoverflow.com/questions/11208446/generating-permutations-of-a-set-most-efficiently
         public static bool NextPermutation<T>(T[] numList)
@@ -98,11 +99,29 @@ namespace Algorithms
                 for (int index = 1; index < elements.Length; index++)
                 {
                     resultSets[(pattern >> (index - 1)) & 1].Add(elements[index]);
-                }
+                } 
 
                 yield return Tuple.Create(
                     resultSets[0].ToArray(), resultSets[1].ToArray());
             }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Bit(this int k, int d)
+        {
+            return (k >> d) & 1;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int BitFlip(this int k, int d)
+        {
+            return k ^ (1 << d);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int BitInvert(this int k, int digits)
+        {
+            return k ^ ((1 << digits) - 1);
         }
     }
 }
