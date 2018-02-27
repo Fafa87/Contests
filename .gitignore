@@ -16,3 +16,5 @@ Output/big.out
 zip_solution.zip
 deadline.v12.suo
 *.bak
+GUIs\.exe
+*.exe
