@@ -61,6 +61,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\_Commons\Algorithms\Algorithms.csproj">
+      <Project>{8e2cb20b-73c6-4871-8b9e-7e87caf77436}</Project>
+      <Name>Algorithms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Algorithms.QuickGraph\Algorithms.QuickGraph.csproj">
       <Project>{15392209-dc1f-4483-a085-1b28b170a549}</Project>
       <Name>Algorithms.QuickGraph</Name>

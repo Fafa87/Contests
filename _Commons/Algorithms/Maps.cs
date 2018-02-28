@@ -15,18 +15,22 @@ namespace Algorithms
                 this.Add(oneRow.ToList());
         }
 
+        public void Fill(List<string> data, Func<char, T> parseField)
+        {
+            for (int i = 0; i < Rows; i++)
+            {
+                var curRow = data[i];
+                for (int i2 = 0; i2 < Cols; i2++)
+                {
+                    this[i][i2] = parseField(curRow[i2]);
+                }
+            }
+        }
+
         public static Map<T> ParseMap<T>(List<string> data, Func<char, T> parseField)
         {
             Map<T> map = new Map<T>(data.Count, data[0].Length);
-
-            for (int i = 0; i < map.Rows; i++)
-            {
-                var curRow = data[i];
-                for (int i2 = 0; i2 < map.Cols; i2++)
-                {
-                    map[i][i2] = parseField(curRow[i2]);
-                }
-            }
+            map.Fill(data, parseField);
             return map;
         }
 
