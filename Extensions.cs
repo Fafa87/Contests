@@ -226,11 +226,6 @@ namespace Deadline
             return string.Join(" ", data.Select(d => d.ToString()));
         }
 
-        public static IEnumerable<Tuple<int, T>> WithIndex<T>(this IEnumerable<T> collection)
-        {
-            return collection.Select((obj, i) => Tuple.Create(i, obj));
-        }
-
         public static T MinElement<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> selector)
             where T : class
         {

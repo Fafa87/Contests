@@ -25,6 +25,11 @@ namespace Algorithms
             return end;
         }
 
+        public static IEnumerable<Tuple<int, T>> WithIndex<T>(this IEnumerable<T> collection)
+        {
+            return collection.Select((obj, i) => Tuple.Create(i, obj));
+        }
+
         public static int GetLowerBound<T>(this List<T> l, T value)
         {
             var num = l.BinarySearch(value);

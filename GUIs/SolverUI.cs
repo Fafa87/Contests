@@ -30,6 +30,7 @@ namespace GUIs
             try
             {
                 grid = new Grid(g, s, 10, 10);
+                //view = new View(new Size(World.Size, World.Size), s);
                 grid.Draw(Pens.Aqua);
                 grid.FillField(Brushes.Black, 2, 2);
                 grid.FillField(Brushes.Black, Selected.Y, Selected.X);
