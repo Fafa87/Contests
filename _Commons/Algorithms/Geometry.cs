@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections;
 //using System.Xml;
 
 
@@ -77,7 +78,7 @@ public static class GeometryUtils
     }
 }
 
-public struct GridPoint
+public struct GridPoint : IComparable<GridPoint>
 {
     public int X, Y;
     public GridPoint(int px, int py)
@@ -90,6 +91,16 @@ public struct GridPoint
     {
         X = p.Item1;
         Y = p.Item2;
+    }
+
+    public static bool operator ==(GridPoint x, GridPoint y)
+    {
+        return x.Equals(y);
+    }
+
+    public static bool operator !=(GridPoint x, GridPoint y)
+    {
+        return !(x == y);
     }
 
     public static GridPoint operator +(GridPoint a, GridPoint b) 
@@ -133,6 +144,21 @@ public struct GridPoint
     public GridPoint ManhattanStep()
     {
         return new GridPoint(Math.Sign(X), Math.Sign(Y));
+    }
+
+    public int CompareTo(GridPoint other)
+    {
+        if (X < other.X)
+            return -1;
+        if (X > other.X)
+            return 1;
+
+        if (Y < other.Y)
+            return -1;
+        if (Y > other.Y)
+            return 1;
+
+        return 0;
     }
 }
 

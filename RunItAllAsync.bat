@@ -1,13 +1,14 @@
 @ECHO OFF
 
 set name=probe
-REM exe is Deadline.exe
+setlocal enableDelayedExpansion
 
-for /L %%i in (0,1,10) do if exist input\%name%0%%i.in ( call RunAsync.bat %name%0%%i
-    echo ...puszczone %name%0%%i
-)
-for /L %%i in (0,1,10) do if exist input\%name%1%%i.in ( call RunAsync.bat %name%1%%i
-    echo ...puszczone %name%1%%i
+for /L %%i in (0,1,10) do (
+    set "n=00%%i"
+    set "NAME=%name%!n:~-2!
+    if exist input\!NAME!.in ( call RunAsync.bat !NAME!
+        echo ...puszczone !NAME!
+    )
 )
 
 REM call RunAsync.bat %name%00
