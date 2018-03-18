@@ -36,38 +36,6 @@ namespace Algorithms
             return num >= 0 ? num : ~num;
         }
 
-        public static int Max(params int[] nums)
-        {
-            int res = nums[0];
-            for(int i=1;i<nums.Length;i++)
-                res = Math.Max(res, nums[i]);
-            return res;
-        }
-
-        public static double Max(params double[] nums)
-        {
-            double res = nums[0];
-            for (int i = 1; i < nums.Length; i++)
-                res = Math.Max(res, nums[i]);
-            return res;
-        }
-
-        public static int Min(params int[] nums)
-        {
-            int res = nums[0];
-            for (int i = 1; i < nums.Length; i++)
-                res = Math.Min(res, nums[i]);
-            return res;
-        }
-
-        public static double Min(params double[] nums)
-        {
-            double res = nums[0];
-            for (int i = 1; i < nums.Length; i++)
-                res = Math.Min(res, nums[i]);
-            return res;
-        }
-
         public static List<T> FindLIS<T>(this IList<T> nums)
         {
             var orderednum = new List<T>();
