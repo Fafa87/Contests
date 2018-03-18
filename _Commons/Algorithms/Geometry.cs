@@ -129,6 +129,11 @@ public struct GridPoint
         int deltaY = Y - b.Y;
         return (int)Math.Ceiling(Math.Sqrt(deltaX * deltaX + deltaY * deltaY));
     }
+
+    public GridPoint ManhattanStep()
+    {
+        return new GridPoint(Math.Sign(X), Math.Sign(Y));
+    }
 }
 
 

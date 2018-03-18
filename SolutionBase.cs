@@ -39,8 +39,8 @@ public class SolutionBase
 
     public virtual void GetData()
     {
-    //    this.state = new GameState();
-    //    client.LearnState(state);
+        this.state = new GameState();
+        client.LearnState(state);
     }
 
     protected virtual bool TakeBestAction()

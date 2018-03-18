@@ -261,6 +261,21 @@ namespace Deadline
             var minimum = collection.Max();
             return collection.First(p => p == minimum);
         }
+
+        public static T DeepClone<T>(this T obj)
+            where T : class
+        {
+            T objResult = null;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(ms, obj);
+
+                ms.Position = 0;
+                objResult = bf.Deserialize(ms) as T;
+            }
+            return objResult;
+        }
     }
 }
 

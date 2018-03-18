@@ -3,10 +3,10 @@
 set name=probe
 REM exe is Deadline.exe
 
-for /L %%i in (1,1,10) do if exist input\%name%0%%i.in ( call Run.bat %name%0%%i
+for /L %%i in (0,1,10) do if exist input\%name%0%%i.in ( call Run.bat %name%0%%i
     echo ...zrobione %name%0%%i
 )
-for /L %%i in (1,1,10) do if exist input\%name%1%%i.in ( call Run.bat %name%1%%i
+for /L %%i in (0,1,10) do if exist input\%name%1%%i.in ( call Run.bat %name%1%%i
     echo ...zrobione %name%1%%i
 )
 

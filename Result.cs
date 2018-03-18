@@ -37,16 +37,6 @@ public class Result
         // created result may be invalid so this is an optional safe guard
     }
 
-    public void Print()
-    {
-        Console.Out.WriteLine(Actions.Count);
-
-        foreach (var act in Actions)
-        {
-            Console.Out.WriteLine(act.ToString());
-        }
-    }
-
     public Result PickBetter(Result other)
     {
         return CalculateQuality() >= other.CalculateQuality() ? this : other;

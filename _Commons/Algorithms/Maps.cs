@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Algorithms
 {
+    [Serializable]
     public class Map<T> : List<List<T>>
     {
+        public Map(GridPoint shape) : this(shape.Y, shape.X)
+        {
+
+        }
+
         public Map(int rows, int cols)
         {
             var oneRow = Enumerable.Repeat(default(T), cols);
@@ -27,11 +33,27 @@ namespace Algorithms
             }
         }
 
-        public static Map<T> ParseMap<T>(List<string> data, Func<char, T> parseField)
+        public void Fill(T value)
         {
-            Map<T> map = new Map<T>(data.Count, data[0].Length);
-            map.Fill(data, parseField);
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int i2 = 0; i2 < Cols; i2++)
+                {
+                    this[i][i2] = value;
+                }
+            }
+        }
+
+        public static Map<T> ParseMap<T>(IEnumerable<string> data, Func<char, T> parseField)
+        {
+            Map<T> map = new Map<T>(data.Count(), data.First().Length);
+            map.Fill(data.ToList(), parseField);
             return map;
+        }
+
+        public GridPoint Shape
+        {
+            get { return new GridPoint(Cols, Rows); }
         }
 
         public int Rows
@@ -44,6 +66,27 @@ namespace Algorithms
             get { return this[0].Count; }
         }
 
+        public List<GridPoint> Coordinates(Func<T, bool> filter = null)
+        {
+            filter = filter ?? new Func<T, bool>((c) => true);
+
+            List<GridPoint> res = new List<GridPoint>();
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int i2 = 0; i2 < Cols; i2++)
+                {
+                    if (filter(this[i][i2]))
+                        res.Add(new GridPoint(i2, i));
+                }
+            }
+            return res;
+        }
+
+        public bool IsInside(GridPoint point)
+        {
+            return point.X >= 0 && point.Y >= 0 && point.X < Cols && point.Y < Rows;
+        }
+
         public T this[GridPoint point]
         {
             get
@@ -54,6 +97,23 @@ namespace Algorithms
             {
                 this[point.Y][point.X] = value;
             }
+        }
+
+        protected virtual string FormatField(T c)
+        {
+            if (c is bool)
+            {
+                return (bool)((object)c) ? "1" : "0";
+            }
+            else
+                return c.ToString();
+        }
+
+        public override string ToString()
+        {
+            return String.Join("\n", this.Select(p=>String.Join(" ", 
+                p.Select(FormatField)
+            )));
         }
     }
 
