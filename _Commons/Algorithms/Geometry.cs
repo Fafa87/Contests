@@ -179,6 +179,18 @@ public class Point : IEquatable<Point>, IComparable<Point>
     {
     }
 
+    public override int GetHashCode()
+    {
+        return (int)X ^ (int)Y;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Point)
+            return this.Equals((Point)obj);
+        return false;
+    }
+
     //public Point(string data)
     //{
     //    var tokens = data.Split(' ');

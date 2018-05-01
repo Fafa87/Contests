@@ -68,7 +68,7 @@ public class SolutionBase
             go(new RunInfo(iteration, timeLeft / (iterations - iteration)));
             timer.Stop();
             timeLeft = timeAvailable - timer.ElapsedMilliseconds;
-            double perIteration = timer.ElapsedMilliseconds / (iteration + 1);
+            double perIteration = (double)timer.ElapsedMilliseconds / (iteration + 1);
 
             if (1.1 * perIteration >= timeLeft)
                 break;
@@ -89,7 +89,7 @@ public class SolutionBase
 
             iterations++;
             timeLeft = timeAvailable - timer.ElapsedMilliseconds;
-            perIteration = timer.ElapsedMilliseconds / iterations;
+            perIteration = (double)timer.ElapsedMilliseconds / iterations;
 
             if (stop)
                 break;
