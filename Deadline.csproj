@@ -96,6 +96,7 @@
     <Compile Include="Actions.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GameState.cs" />
+    <Compile Include="MapRecoloring.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />

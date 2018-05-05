@@ -21,17 +21,28 @@ public class Solution : SolutionBase
 
     public override bool Act()
     {
-        Result real;
-        SolveMini(0);
-        real = best;
-        for(int i=1;i<1000000;i++)
+        int H = int.Parse(Console.ReadLine());
+        int S = int.Parse(Console.ReadLine());
+        int[] regions = new int[S];
+        for (int i = 0; i < S; ++i)
         {
-            SolveMini(i);
-            real = real.PickBetter(best);
-            ioClient.SaveResultIfBetter(real);
+            regions[i] = int.Parse(Console.ReadLine());
         }
-        best = real;
-        TakeBestAction();
+        int R = int.Parse(Console.ReadLine());
+        int[] oldColors = new int[R];
+        for (int i = 0; i < R; ++i)
+        {
+            oldColors[i] = int.Parse(Console.ReadLine());
+        }
+
+        MapRecoloring mr = new MapRecoloring();
+        int[] ret = mr.recolor(H, regions, oldColors);
+
+        Console.WriteLine(ret.Length);
+        for (int i = 0; i < ret.Length; ++i)
+        {
+            Console.WriteLine(ret[i]);
+        }
         return true;
     }
 
