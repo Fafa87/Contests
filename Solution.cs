@@ -8,9 +8,9 @@ using System.Diagnostics;
 using Deadline;
 using System.Threading;
 
-public class Solution : SolutionBase
+public class Solution : SolutionBase 
 {
-    public Solution(IClient client, int time = 0)
+    public Solution(object client, int time = 0)
         : base(client, time)
     { }
 

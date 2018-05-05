@@ -87,12 +87,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clients\IClient.cs" />
-    <Compile Include="Clients\IOClient.cs" />
-    <Compile Include="Clients\TCPClient.Frame.cs">
-      <DependentUpon>TCPClient.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Clients\TCPClient.cs" />
     <Compile Include="Actions.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GameState.cs" />
@@ -119,7 +113,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(TargetDir)*.*" "$(SolutionDir)"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y "$(TargetDir)*.*" "$(SolutionDir)"
+python "$(SolutionDir)create_solution.py"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

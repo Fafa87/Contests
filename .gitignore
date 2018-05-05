@@ -27,3 +27,11 @@ _Evaluations/tester\.jar
 _init_checker\.bat
 
 _start_checker\.bat
+
+_Evaluations/cache/
+
+created_solution\.cs
+
+_Evaluations/log
+
+_Evaluations/scores\.txt

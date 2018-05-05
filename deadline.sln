@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deadline", "Deadline.csproj", "{7C89D34F-CA7F-4849-BDC9-0DECDE8B4DB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeadlineTest", "DeadlineTest\DeadlineTest.csproj", "{A3492905-3B9D-42E3-925D-09274CC930F3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms", "_Commons\Algorithms\Algorithms.csproj", "{8E2CB20B-73C6-4871-8B9E-7E87CAF77436}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsTest", "_Commons\AlgorithmsTest\AlgorithmsTest.csproj", "{31B06B98-E926-4ACF-A5F0-C5B856825FE4}"
@@ -14,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms.QuickGraph", "_Graph\Algorithms.QuickGraph\Algorithms.QuickGraph.csproj", "{15392209-DC1F-4483-A085-1B28B170A549}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsTest.QuickGraph", "_Graph\AlgorithmsTest.QuickGraph\AlgorithmsTest.QuickGraph.csproj", "{B0CB6A59-C724-45E4-9F6C-BD3F923AF102}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUIs", "GUIs\GUIs.csproj", "{64AE6C13-E3EB-4B15-A0D1-B39EE18CE578}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +23,6 @@ Global
 		{7C89D34F-CA7F-4849-BDC9-0DECDE8B4DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C89D34F-CA7F-4849-BDC9-0DECDE8B4DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C89D34F-CA7F-4849-BDC9-0DECDE8B4DB9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3492905-3B9D-42E3-925D-09274CC930F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3492905-3B9D-42E3-925D-09274CC930F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3492905-3B9D-42E3-925D-09274CC930F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3492905-3B9D-42E3-925D-09274CC930F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E2CB20B-73C6-4871-8B9E-7E87CAF77436}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E2CB20B-73C6-4871-8B9E-7E87CAF77436}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E2CB20B-73C6-4871-8B9E-7E87CAF77436}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,10 +39,6 @@ Global
 		{B0CB6A59-C724-45E4-9F6C-BD3F923AF102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0CB6A59-C724-45E4-9F6C-BD3F923AF102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0CB6A59-C724-45E4-9F6C-BD3F923AF102}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64AE6C13-E3EB-4B15-A0D1-B39EE18CE578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64AE6C13-E3EB-4B15-A0D1-B39EE18CE578}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64AE6C13-E3EB-4B15-A0D1-B39EE18CE578}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64AE6C13-E3EB-4B15-A0D1-B39EE18CE578}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

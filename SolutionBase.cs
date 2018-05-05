@@ -16,16 +16,14 @@ public class SolutionBase
     public static Random random = new Random();
     Stopwatch timer = new Stopwatch();
     
-    IClient client;
-    protected TCPClient tcpClient { get { return client as TCPClient; } }
-    protected IOClient ioClient { get { return client as IOClient; } }
+    object client;
     protected World World; // global constants of a container for a number of state (if many games going concurrently)
     protected GameState state;
     protected Result best;
 
     public const long INF = long.MaxValue / 10;
 
-    public SolutionBase(IClient client, double time = 0)
+    public SolutionBase(object client, double time = 0)
     {
         this.client = client;
         this.timeRemaining = time;
@@ -40,12 +38,11 @@ public class SolutionBase
     public virtual void GetData()
     {
         this.state = new GameState();
-        client.LearnState(state);
     }
 
     protected virtual bool TakeBestAction()
     {
-        return client.TakeAction(best);
+        return true;
     }
 
     public virtual bool Act()
