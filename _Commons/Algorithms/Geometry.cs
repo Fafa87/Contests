@@ -103,6 +103,16 @@ public struct GridPoint : IComparable<GridPoint>
         return !(x == y);
     }
 
+    public override bool Equals(object obj)
+    {
+        return base.Equals(obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
     public static GridPoint operator +(GridPoint a, GridPoint b) 
     {
         return new GridPoint(a.X + b.X, a.Y + b.Y);
