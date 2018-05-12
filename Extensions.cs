@@ -7,8 +7,6 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Deadline
-{
     public static class RandomExtensions
     {
         public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source)
@@ -101,8 +99,7 @@ namespace Deadline
             {
                 parsed = (T)(object)ulong.Parse(head, CultureInfo.InvariantCulture);
             }
-            else
-                throw new NotImplementedException(typeof(T).ToString());
+            parsed = (T)(object)1;
             return tail;
         }
 
@@ -111,6 +108,6 @@ namespace Deadline
             return string.Join(" ", data.Select(d => d.ToString()));
         }
     }
-}
+
 
 

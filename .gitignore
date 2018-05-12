@@ -35,3 +35,7 @@ created_solution\.cs
 _Evaluations/log
 
 _Evaluations/scores\.txt
+
+_Evaluations/tags/
+
+_Evaluations/multiple_tests\.log

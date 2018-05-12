@@ -11,7 +11,8 @@ Usage:
 """
 
 
-input_files = ['MapRecoloring.cs', 'Program.cs', 'SolutionBase.cs', 'Solution.cs']
+input_files = ['MapRecoloring.cs', #'Extensions.cs',
+'_Commons\\Algorithms\\Maps.cs', '_Commons\\Algorithms\\Geometry.cs']#, '_Commons\\Algorithms\\Commons.cs'] #'GameState.cs', 'World.cs', 'Result.cs', 'Actions.cs']
 output_path = 'created_solution.cs'
 
 def read_clean_file(path):

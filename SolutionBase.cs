@@ -27,7 +27,7 @@ public class SolutionBase
     {
         this.client = client;
         this.timeRemaining = time;
-        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+        //CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
     }
 
     public void Restart()
@@ -52,7 +52,7 @@ public class SolutionBase
         // then send results (PrintBest) 
         //
         // or talk in a more complicated way to tcp server
-        throw new NotImplementedException();
+        return true;
     }
 
     public void RunIterations(Action<RunInfo> go, double timeAvailable, int iterations)
