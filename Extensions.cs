@@ -7,21 +7,32 @@ using System.Globalization;
 
 namespace Deadline
 {
-
-
     public static class RandomExtensions
     {
+        public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source, Random rnd)
+        {
+            // uses Fisher–Yates shuffle, see:
+            // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
+
+            var result = source.ToArray();
+
+            for (int i = result.Length; i > 1; i--)
+            {
+                int j = rnd.Next(i);
+                ClientExtensions.Swap(ref result[i - 1], ref result[j]);
+            }
+
+            return result;
+        }
+
         public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source)
         {
-            // TODO is it not very slow??
-            Random rnd = new Random();
-            return source.OrderBy<T, int>((item) => rnd.Next());
+            return source.Randomize(new Random());
         }
 
         public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source, int seed)
         {
-            Random rnd = new Random(seed);
-            return source.OrderBy<T, int>((item) => rnd.Next());
+            return source.Randomize(new Random(seed));
         }
     }
 
