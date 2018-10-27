@@ -21,6 +21,16 @@ public abstract class GameStateObject
     }
 }
 
+public class Unit : GameStateObject
+{
+    public Point Point = new Point(0, 0);
+    public double X { get { return Point.X; } set { Point.X = value; } }
+    public double Y { get { return Point.Y; } set { Point.Y = value; } }
+
+    public virtual bool CollisionWith(Unit b) { return false; }
+    public Unit(GameState g, int id) : base(g, id) { }
+}
+
 public class GameState
 {
     public static readonly int LevelNumber = 1;

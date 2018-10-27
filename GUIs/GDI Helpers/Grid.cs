@@ -68,14 +68,15 @@ namespace GUIs.GDI_Helpers
             return System.Drawing.Rectangle.FromLTRB(p1.X, p1.Y, p2.X, p2.Y);
         }
 
-        public void DrawText(string text, int y, int x)
+        public void DrawText(string text, int y, int x, Brush brush = null)
         {
+            brush = brush ?? Brushes.Black;
             StringFormat format = new StringFormat()
             {
                 LineAlignment = StringAlignment.Center,
                 Alignment = StringAlignment.Center
             };
-            _g.DrawString(text, SystemFonts.CaptionFont, Brushes.Black, GetCorner(x, y).X, GetCorner(x, y).Y);
+            _g.DrawString(text, SystemFonts.CaptionFont, brush, GetCorner(x, y).X, GetCorner(x, y).Y);
         }
 
         public void FillField(Brush brush, int y, int x)

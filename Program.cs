@@ -42,9 +42,14 @@ namespace Deadline
             SolutionBase solver = newSolver(client);
             while (true)
             {
+                //if (client.TurnLeftIsNewGame().Item2)
+                //    solver.Restart();
+
                 solver.GetData();
                 if (solver.Act() == false)
                     break;
+
+                //client.Wait();
             }
         }
 
@@ -52,7 +57,7 @@ namespace Deadline
         {
             var client = new TCPClient(server, port);
             client.Login();
-            RunClient(client, (c) => new SolutionBase(client));
+            RunClient(client, (c) => new Solution(client));
             client.Exit();
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Algorithms;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,12 +12,13 @@ namespace Deadline
     {
         public void LearnState(GameState game)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException(); unless it is simplest flow
         }
 
         public bool TakeAction(Result r)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException(); unless it is simplest flow
+            return true;
         }
 
         public void SaveResultIfBetter(Result r)

@@ -7,11 +7,11 @@ namespace Deadline
 {
     public class World
     {
-        //public double playerRadius;
-        internal void Parse(string data)
+        // public Maps Map;
+        // public List<GameState> GameStates = new List<GameState>();
+        public void Parse(string data)
         {
-            //var param = data.ParseList<double>();
-            //playerRadius = param[3];
+
         }
     }
 }

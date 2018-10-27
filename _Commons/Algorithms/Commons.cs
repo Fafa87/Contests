@@ -25,42 +25,15 @@ namespace Algorithms
             return end;
         }
 
+        public static IEnumerable<Tuple<int, T>> WithIndex<T>(this IEnumerable<T> collection)
+        {
+            return collection.Select((obj, i) => Tuple.Create(i, obj));
+        }
+
         public static int GetLowerBound<T>(this List<T> l, T value)
         {
             var num = l.BinarySearch(value);
             return num >= 0 ? num : ~num;
-        }
-
-        public static int Max(params int[] nums)
-        {
-            int res = nums[0];
-            for(int i=1;i<nums.Length;i++)
-                res = Math.Max(res, nums[i]);
-            return res;
-        }
-
-        public static double Max(params double[] nums)
-        {
-            double res = nums[0];
-            for (int i = 1; i < nums.Length; i++)
-                res = Math.Max(res, nums[i]);
-            return res;
-        }
-
-        public static int Min(params int[] nums)
-        {
-            int res = nums[0];
-            for (int i = 1; i < nums.Length; i++)
-                res = Math.Min(res, nums[i]);
-            return res;
-        }
-
-        public static double Min(params double[] nums)
-        {
-            double res = nums[0];
-            for (int i = 1; i < nums.Length; i++)
-                res = Math.Min(res, nums[i]);
-            return res;
         }
 
         public static List<T> FindLIS<T>(this IList<T> nums)

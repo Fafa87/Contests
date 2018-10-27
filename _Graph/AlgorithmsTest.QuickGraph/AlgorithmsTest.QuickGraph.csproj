@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{31B06B98-E926-4ACF-A5F0-C5B856825FE4}</ProjectGuid>
+    <ProjectGuid>{B0CB6A59-C724-45E4-9F6C-BD3F923AF102}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlgorithmsTest</RootNamespace>
-    <AssemblyName>AlgorithmsTest</AssemblyName>
+    <RootNamespace>AlgorithmsTest.QuickGraph</RootNamespace>
+    <AssemblyName>AlgorithmsTest.QuickGraph</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,25 +34,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>.\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="QuickGraph">
+      <HintPath>..\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Glee">
+      <HintPath>..\QuickGraph.Glee.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -68,20 +56,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CombinatoricsTest.cs" />
-    <Compile Include="UtilsTest.cs" />
-    <Compile Include="GraphsTest.cs" />
-    <Compile Include="MapsTest.cs" />
-    <Compile Include="CommonsTest.cs" />
-    <Compile Include="Geometry3DTest.cs" />
-    <Compile Include="GeometryTest.cs" />
+    <Compile Include="Map2DGraphTest.cs" />
+    <Compile Include="QuickGraphTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Algorithms\Algorithms.csproj">
+    <ProjectReference Include="..\..\_Commons\Algorithms\Algorithms.csproj">
       <Project>{8e2cb20b-73c6-4871-8b9e-7e87caf77436}</Project>
       <Name>Algorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Algorithms.QuickGraph\Algorithms.QuickGraph.csproj">
+      <Project>{15392209-dc1f-4483-a085-1b28b170a549}</Project>
+      <Name>Algorithms.QuickGraph</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

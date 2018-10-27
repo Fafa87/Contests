@@ -10,21 +10,16 @@ namespace AlgorithmsTest
     public class CommonsTest
     {
         [TestMethod]
-        public void TestMax()
+        public void WithIndexTest()
         {
-            Assert.AreEqual(4, Commons.Max(4));
-            Assert.AreEqual(4.2, Commons.Max(4.2));
-            Assert.AreEqual(3, Commons.Max(1, 3));
-            Assert.AreEqual(3.4, Commons.Max(1, 3.4));
-        }
+            List<double> data = new List<double>();
+            Assert.AreEqual(0, data.WithIndex().Count());
 
-        [TestMethod]
-        public void TestMin()
-        {
-            Assert.AreEqual(4, Commons.Min(4));
-            Assert.AreEqual(4.2, Commons.Min(4.2));
-            Assert.AreEqual(1, Commons.Min(1, 3));
-            Assert.AreEqual(1, Commons.Min(1, 3.4));
+            data.Add(2.3);
+            data.Add(2.9);
+            var indexedData = data.WithIndex();
+            CollectionAssert.AreEqual(new[] { 0, 1 }, indexedData.Select(p => p.Item1).ToList());
+            CollectionAssert.AreEqual(new[] { 2.3, 2.9 }, indexedData.Select(p => p.Item2).ToList());
         }
 
         [TestMethod]

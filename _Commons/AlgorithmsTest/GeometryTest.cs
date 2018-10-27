@@ -111,6 +111,24 @@ namespace AlgorithmsTest
         }
 
         [TestMethod]
+        public void TestGridPoint()
+        {
+            GridPoint p1 = new GridPoint(1, 3);
+            GridPoint p2 = new GridPoint(1, 3);
+            GridPoint p3 = new GridPoint(2, 3);
+            GridPoint p4 = new GridPoint(2, 5);
+
+            Assert.AreEqual(p1, p2);
+            Assert.AreEqual(true, p1 == p2);
+            Assert.AreEqual(false, p1 != p2);
+            Assert.AreEqual(false, p3 == p4);
+            Assert.AreEqual(true, p3 != p4);
+            var all = new[] { p4, p3, p2, p1 };
+            var ordered = all.OrderBy(p => p).ToArray();
+            CollectionAssert.AreEqual(new[] { p1, p2, p3, p4 }, ordered);
+        }
+
+        [TestMethod]
         public void TestRectangle()
         {
             Assert.AreEqual(1, new Rectangle(new Point(1, 2), new Point(2, 3)).Area);

@@ -5,11 +5,14 @@ using System.Text;
 
 namespace Algorithms
 {
+    // There is QuickGraph library which should be used if possible.
+    // In this file we will create a simpler version for contest where it is forbidden to use external dlls.
+
     // TODO propose a nice and clean and generic way to create graph for graph algorithms (composition, interface whatever)
     // below code is not good nor finished
     // TODO generyczny BFS, DFS, DIJKSTRA
     // Oparty na funkcjach? (albo implementacji interfejsu)
-    // GetNeighbours(node), IsVisited(node), SetVisited(node), SetDistance(node, val) 
+    // GetNeighbours(node), IsVisited(node), SetVisited(node), SetDistance(node, val)
 
     public class Edge<TData> // bidirectional edge
     {
@@ -129,6 +132,40 @@ namespace Algorithms
             return res;
         }
 
+
+        //6. Prosty BFS - lekki, bez potrzeby używania QuickGraph:
+        //    private void UpdateStability(GameState state, Map<bool> edges, Map<int> stability, GridPoint start, int startStab)
+        //    {
+        //        HashSet<GridPoint> visited = new HashSet<GridPoint>();
+        //        Queue<Tuple<int, GridPoint>> queue = new Queue<Tuple<int, GridPoint>>();
+        //        queue.Enqueue(Tuple.Create(startStab, start));
+        //        visited.Add(start);
+
+        //        while(queue.Any())
+        //        {
+        //            var d = queue.Dequeue();
+        //            var point = d.Item2;
+        //            var current = d.Item1;
+
+        //            if (current > state.Stability)
+        //                break;
+
+        //            visited.Add(point);
+
+        //            foreach(var m in Moves.All4)
+        //            {
+        //                var newPos = m.Move(point);
+        //                if (edges.IsInside(newPos) && visited.Contains(newPos) == false)
+        //                {
+        //                    if (stability[newPos] > current + 1)
+        //                    {
+        //                        queue.Enqueue(Tuple.Create(current + 1, newPos));
+        //                        stability[newPos] = current + 1;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
         
 
         //private bool Visited(GridPoint gp)

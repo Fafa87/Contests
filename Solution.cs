@@ -42,6 +42,7 @@ public class Solution : SolutionBase
         // solution
 
         ImproveAfter(best);
+        best.CalculateQuality();
         return true;
     }
 
