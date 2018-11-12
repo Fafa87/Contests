@@ -1,1 +1,0 @@
-java -jar Input\simulator.jar --level=Input\level5.in  --tcp=500 --speed=3

@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms.QuickGraph", "_G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsTest.QuickGraph", "_Graph\AlgorithmsTest.QuickGraph\AlgorithmsTest.QuickGraph.csproj", "{B0CB6A59-C724-45E4-9F6C-BD3F923AF102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUIs", "GUIs\GUIs.csproj", "{64AE6C13-E3EB-4B15-A0D1-B39EE18CE578}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{B0CB6A59-C724-45E4-9F6C-BD3F923AF102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0CB6A59-C724-45E4-9F6C-BD3F923AF102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0CB6A59-C724-45E4-9F6C-BD3F923AF102}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64AE6C13-E3EB-4B15-A0D1-B39EE18CE578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64AE6C13-E3EB-4B15-A0D1-B39EE18CE578}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64AE6C13-E3EB-4B15-A0D1-B39EE18CE578}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64AE6C13-E3EB-4B15-A0D1-B39EE18CE578}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
