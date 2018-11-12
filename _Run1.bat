@@ -1,1 +1,0 @@
-call _RunInstance.bat JEDEN contest.pizza 20000
