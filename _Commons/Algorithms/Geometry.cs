@@ -218,6 +218,16 @@ public class Point : IEquatable<Point>, IComparable<Point>
         return new Point(a.X-b.X,a.Y-b.Y);
     }
 
+    public static Point operator +(Point a, double mult)
+    {
+        return new Point(a.X + mult, a.Y + mult);
+    }
+
+    public static Point operator -(Point a, double mult)
+    {
+        return new Point(a.X - mult, a.Y - mult);
+    }
+
     public static Point operator*(Point a, double mult)
     {
         return new Point(a.X * mult, a.Y * mult);
