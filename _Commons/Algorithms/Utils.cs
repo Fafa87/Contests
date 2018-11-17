@@ -20,36 +20,32 @@ namespace Algorithms
         }
 
         public static T MinElement<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> selector)
-                where T : class
         {
             if (collection.Any() == false)
-                return null;
+                return default(T);
             var minimum = collection.Min(p => selector(p));
             return collection.First(p => selector(p).Equals(minimum));
         }
 
         public static T MinElement<T>(this IEnumerable<T> collection)
-                where T : class
         {
             if (collection.Any() == false)
-                return null;
+                return default(T);
             return collection.Min();
         }
 
         public static T MaxElement<T, TResult>(this IEnumerable<T> collection, Func<T, TResult> selector)
-            where T : class
         {
             if (collection.Any() == false)
-                return null;
+                return default(T);
             var minimum = collection.Max(p => selector(p));
             return collection.First(p => selector(p).Equals(minimum));
         }
 
         public static T MaxElement<T>(this IEnumerable<T> collection)
-            where T : class
         {
             if (collection.Any() == false)
-                return null;
+                return default(T);
             return collection.Max();
         }
 
