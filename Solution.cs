@@ -14,40 +14,17 @@ public class Solution : SolutionBase
         : base(client, time)
     { }
 
+    List<int> values;
     public override void GetData()
     {
-        base.GetData();
+        values = Console.ReadLine().ParseList<int>();
     }
 
     public override bool Act()
     {
-        Result real;
-        SolveMini(0);
-        real = best;
-        for(int i=1;i<1000000;i++)
-        {
-            SolveMini(i);
-            real = real.PickBetter(best);
-            ioClient.SaveResultIfBetter(real);
-        }
-        best = real;
-        TakeBestAction();
+        int sum = values.Sum();
+
+        Console.Out.WriteLine(sum);
         return true;
-    }
-
-    public bool SolveMini(int seed)
-    {
-        best = new Result(state);
-
-        // solution
-
-        ImproveAfter(best);
-        best.CalculateQuality();
-        return true;
-    }
-
-    public void ImproveAfter(Result result)
-    {
-        return;
     }
 }
