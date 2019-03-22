@@ -31,6 +31,7 @@ public class Solution : SolutionBase
         public int StartTime = 0;
 
         public double HP = 1;
+        public double Loot;
 
         public bool IsEnd(int czas)
         {
@@ -112,6 +113,7 @@ public class Solution : SolutionBase
 
         public State state = State.Seeking;
         public Alien lockedOn;
+        public int Shoot;
 
         public bool InRange(Point alienpos)
         {
@@ -145,6 +147,7 @@ public class Solution : SolutionBase
         var healthspeed = Console.ReadLine().ParseList<double>();
         var health = healthspeed[0];
         var speed = healthspeed[1];
+        var loot = healthspeed[2];
 
 
         List<Alien> aliens = new List<Alien>();
@@ -153,7 +156,7 @@ public class Solution : SolutionBase
         {
 
             var tiime = Console.ReadLine().ParseAllTokens<int>();
-            var one = new Alien() { direction = 0, speed = speed, StartTime = tiime, Id = i, HP = health };
+            var one = new Alien() { direction = 0, speed = speed, StartTime = tiime, Id = i, HP = health, Loot = loot };
             aliens.Add(one);
         }
 
@@ -165,8 +168,8 @@ public class Solution : SolutionBase
         var damage = damagerange[0];
         var range = damagerange[1];
         var cost = damagerange[2];
-        var gold = Console.ReadLine().ParseAllTokens<double>();
-
+        var goldorg = Console.ReadLine().ParseAllTokens<double>();
+        var gold = goldorg;
         var towers = new List<Tower>();
 
         Dictionary<Point, int> close = new Dictionary<Point, int>();
@@ -202,13 +205,18 @@ public class Solution : SolutionBase
                 a.state = State.Seeking;
                 a.lockedOn = null;
             }
-            current = aliens;
-            
-            var goodTowers = close.OrderByDescending(a => a.Value).Take((int)(gold / cost) * 1).Randomize().ToList();
+            current = aliens.DeepClone();
+            gold = goldorg;
+
+            var goodTowers = close.OrderByDescending(a => a.Value).Take(500).Randomize().ToList();
+            int usedTowers = 0;
             foreach (var t in goodTowers.Take(Math.Min(500, (int)(gold / cost))))
             {
-                towers.Add(new Tower() { pos = new Point(t.Key.X, t.Key.Y), Damage = damage, Range = range });
+                towers.Add(new Tower() { pos = new Point(t.Key.X, t.Key.Y), Damage = damage, Range = range, Shoot = 0 });
+                usedTowers++;
+                gold -= cost;
             }
+            goodTowers = goodTowers.Skip(usedTowers).ToList();
 
             //Console.Out.WriteLine(towers.Count.ToString() + " " + (int)(gold / cost));
             /*
@@ -224,9 +232,9 @@ public class Solution : SolutionBase
             {
                 if (current.Any(a => a.IsEnd(curtime)))
                 {
-                    Console.Out.WriteLine(curtime);
-                    Console.Out.WriteLine("LOSS");
-                    break;// return true;
+                    //Console.Out.WriteLine(curtime);
+                    //Console.Out.WriteLine("LOSS");
+                    break;
                 }
                 else
                 {
@@ -260,9 +268,23 @@ public class Solution : SolutionBase
                             {
                                 tower.lockedOn.HP -= tower.Damage;
                                 if (tower.lockedOn.HP <= 0)
-                                    current.Remove(tower.lockedOn);
+                                {
+                                    if (current.Remove(tower.lockedOn))
+                                        gold += tower.lockedOn.Loot;
+                                }
                             }
                         }
+
+                        usedTowers = 0;
+                        while(gold >= cost && towers.Count < 500)
+                        {
+                            var towernew = goodTowers[usedTowers];
+                            towers.Add(new Tower() { pos = new Point(towernew.Key.X, towernew.Key.Y), Damage = damage, Range = range, Shoot = curtime });
+                            usedTowers++;
+                            gold -= cost;
+                        }
+                        goodTowers = goodTowers.Skip(usedTowers).ToList();
+                        usedTowers = 0;
                     }
                 }
 
@@ -271,11 +293,13 @@ public class Solution : SolutionBase
             }
             if (current.Any() == false)
                 break;
+
+
         }
 
         foreach(var t in towers)
         {
-            Console.Out.WriteLine(t.pos.ToString());
+            Console.Out.WriteLine(t.pos.ToString() + " " + t.Shoot);
         }
 
 

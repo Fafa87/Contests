@@ -1,6 +1,6 @@
 @ECHO OFF
 
-set name=level5_
+set name=level6_
 setlocal enableDelayedExpansion
 
 for /L %%i in (0,1,10) do (
