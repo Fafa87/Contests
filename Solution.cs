@@ -22,6 +22,7 @@ public class Solution : SolutionBase
 
     List<Alien> current = new List<Alien>();
 
+    [Serializable]
     public class Alien
     {
         public int Id;
@@ -156,7 +157,7 @@ public class Solution : SolutionBase
             aliens.Add(one);
         }
 
-        current = aliens;
+        current = aliens.DeepClone();
 
         Alien.CalcTrack(commands, p);
 
@@ -167,67 +168,121 @@ public class Solution : SolutionBase
         var gold = Console.ReadLine().ParseAllTokens<double>();
 
         var towers = new List<Tower>();
-        var towern = Console.ReadLine().ParseAllTokens<int>();
-        for (int i = 0; i < towern; i++)
-        {
-            var x_y = Console.ReadLine().ParseAllTokens<int, int>();
-            towers.Add(new Tower() { pos = new Point(x_y.Item1, x_y.Item2), Damage = damage, Range = range});
-        }
 
-        var curtime = 0;
-        while (current.Any())
+        Dictionary<Point, int> close = new Dictionary<Point, int>();
+        var trackH = Alien.track.ToHashSet();
+        foreach (var s in Alien.track)
         {
-            if (current.Any(a => a.IsEnd(curtime)))
+            foreach(var move in Moves.All8)
             {
-                Console.Out.WriteLine(curtime);
-                Console.Out.WriteLine("LOSS");
-                return true;
-            }
-            else
-            {
-                if (curtime > 0)
+                var cand = move.Move(s);
+                if (trackH.Contains(cand) == false)
                 {
-                    foreach (var tower in towers)
-                    {
-                        if (tower.state == State.Locked)
-                        {
-                            if (!tower.InRange(tower.lockedOn.Position(curtime)) || tower.lockedOn.HP <= 0)
-                            {
-                                tower.state = State.Seeking;
-                                tower.lockedOn = null;
-                            }
-                        }
+                    close.Increment(cand, 1);
+                }
 
-                        if (tower.state == State.Seeking)
-                        {
-                            var closest = FindClosestAlien(tower, curtime);
-                            if (closest != null)
-                            {
-                                tower.state = State.Locked;
-                                tower.lockedOn = closest;
-                            }
-                        }
-                    }
-
-                    foreach (var tower in towers)
+                foreach (var move2 in Moves.All8)
+                {
+                    var cand2 = move2.Move(cand);
+                    if (trackH.Contains(cand2) == false)
                     {
-                        if (tower.state == State.Locked)
-                        {
-                            tower.lockedOn.HP -= tower.Damage;
-                            if (tower.lockedOn.HP <= 0)
-                                current.Remove(tower.lockedOn);
-                        }
+                        close.Increment(cand2, 1);
                     }
                 }
             }
+        }
+
+        while (true)
+        {
+            towers.Clear();
+            foreach (var a in aliens)
+                a.HP = health;
+            foreach (var a in towers)
+            {
+                a.state = State.Seeking;
+                a.lockedOn = null;
+            }
+            current = aliens;
+            
+            var goodTowers = close.OrderByDescending(a => a.Value).Take((int)(gold / cost) * 1).Randomize().ToList();
+            foreach (var t in goodTowers.Take(Math.Min(500, (int)(gold / cost))))
+            {
+                towers.Add(new Tower() { pos = new Point(t.Key.X, t.Key.Y), Damage = damage, Range = range });
+            }
+
+            //Console.Out.WriteLine(towers.Count.ToString() + " " + (int)(gold / cost));
+            /*
+            var towern = Console.ReadLine().ParseAllTokens<int>();
+            for (int i = 0; i < towern; i++)
+            {
+                var x_y = Console.ReadLine().ParseAllTokens<int, int>();
+                towers.Add(new Tower() { pos = new Point(x_y.Item1, x_y.Item2), Damage = damage, Range = range});
+            }*/
+
+            var curtime = 0;
+            while (current.Any())
+            {
+                if (current.Any(a => a.IsEnd(curtime)))
+                {
+                    Console.Out.WriteLine(curtime);
+                    Console.Out.WriteLine("LOSS");
+                    break;// return true;
+                }
+                else
+                {
+                    if (curtime > 0)
+                    {
+                        foreach (var tower in towers)
+                        {
+                            if (tower.state == State.Locked)
+                            {
+                                if (!tower.InRange(tower.lockedOn.Position(curtime)) || tower.lockedOn.HP <= 0)
+                                {
+                                    tower.state = State.Seeking;
+                                    tower.lockedOn = null;
+                                }
+                            }
+
+                            if (tower.state == State.Seeking)
+                            {
+                                var closest = FindClosestAlien(tower, curtime);
+                                if (closest != null)
+                                {
+                                    tower.state = State.Locked;
+                                    tower.lockedOn = closest;
+                                }
+                            }
+                        }
+
+                        foreach (var tower in towers)
+                        {
+                            if (tower.state == State.Locked)
+                            {
+                                tower.lockedOn.HP -= tower.Damage;
+                                if (tower.lockedOn.HP <= 0)
+                                    current.Remove(tower.lockedOn);
+                            }
+                        }
+                    }
+                }
 
 
-            curtime++;
+                curtime++;
+            }
+            if (current.Any() == false)
+                break;
+        }
+
+        foreach(var t in towers)
+        {
+            Console.Out.WriteLine(t.pos.ToString());
         }
 
 
-        Console.Out.WriteLine(curtime-1);
-        Console.Out.WriteLine("WIN");
+        //Console.Out.WriteLine(curtime-1);
+        //Console.Out.WriteLine("WIN");
+
+
 
         return true;
     }

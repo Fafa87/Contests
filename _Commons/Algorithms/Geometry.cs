@@ -270,7 +270,7 @@ public class Point : IEquatable<Point>, IComparable<Point>
 
     public override String ToString()
     {
-        return String.Format("x={0} y={1}", X, Y);
+        return String.Format("{0} {1}", X, Y);
     }
 
     public double Distance(Point b)

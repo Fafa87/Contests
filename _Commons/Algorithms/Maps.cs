@@ -175,26 +175,26 @@ namespace Algorithms
             }
         }
 
-        public static GridPoint Move(this Moves8 d, GridPoint point)
+        public static Point Move(this Moves8 d, Point point)
         {
             switch (d)
             {
                 case Moves8.Up:
-                    return new GridPoint(point.X, point.Y - 1);
+                    return new Point(point.X, point.Y - 1);
                 case Moves8.Down:
-                    return new GridPoint(point.X, point.Y + 1);
+                    return new Point(point.X, point.Y + 1);
                 case Moves8.Left:
-                    return new GridPoint(point.X - 1, point.Y);
+                    return new Point(point.X - 1, point.Y);
                 case Moves8.Right:
-                    return new GridPoint(point.X + 1, point.Y);
+                    return new Point(point.X + 1, point.Y);
                 case Moves8.UpLeft:
-                    return new GridPoint(point.X - 1, point.Y - 1);
+                    return new Point(point.X - 1, point.Y - 1);
                 case Moves8.UpRight:
-                    return new GridPoint(point.X + 1, point.Y - 1);
+                    return new Point(point.X + 1, point.Y - 1);
                 case Moves8.DownLeft:
-                    return new GridPoint(point.X - 1, point.Y + 1);
+                    return new Point(point.X - 1, point.Y + 1);
                 case Moves8.DownRight:
-                    return new GridPoint(point.X + 1, point.Y + 1);
+                    return new Point(point.X + 1, point.Y + 1);
                 default:
                     throw new ArgumentException("Unsupported move: " + d);
             }
