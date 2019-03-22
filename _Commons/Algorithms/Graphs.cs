@@ -96,27 +96,28 @@ namespace Algorithms
         }
         // Prosty DFS 
 
-        /*
-         * int kolorBud = -1;
-            public void dfs2Bud(HotSpot hot, GridPoint start, int startbasin)
-            {
-                if (budyn[start] == kolorBud)
-                    return;
-                budyn[start] = kolorBud;
-                hot.points.Add(start);
 
-                foreach (var move in Moves.All4)
+        /*
+        int kolorBud = -1;
+        public void dfs(HotSpot hot, GridPoint start, int startbasin, int kolorCur = -1)
+        {
+            if (budyn[start] == kolorBud)
+                return;
+            budyn[start] = kolorBud;
+            hot.points.Add(start);
+
+            foreach (var move in Moves.All4)
+            {
+                var newpos = move.Move(start);
+                if (mapa.IsInside(newpos))
                 {
-                    var newpos = move.Move(start);
-                    if (mapa.IsInside(newpos))
+                    if (mapa[newpos] == startbasin)
                     {
-                        if (mapa[newpos] == startbasin)
-                        {
-                            budyn[start] = kolorBud;
-                            dfs2Bud(hot, newpos, startbasin);
-                        }
+                        budyn[start] = kolorBud;
+                        dfs2Bud(hot, newpos, startbasin);
                     }
                 }
+            }
             }
          * */
 
