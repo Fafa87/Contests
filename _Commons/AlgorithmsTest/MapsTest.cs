@@ -4,12 +4,19 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Collections.Generic;
 using Algorithms;
+using System.Globalization;
 
 namespace AlgorithmsTest
 {
     [TestClass]
     public class MapsTest
     {
+        [TestInitialize]
+        public void Initialize()
+        {
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+        }
+
         [TestMethod]
         public void CreateMapFromString()
         {
@@ -29,10 +36,67 @@ namespace AlgorithmsTest
             Assert.AreEqual(true, map2[1][1]);
             Assert.AreEqual(false, map2[1][2]);
 
-            var point = new GridPoint(2,1);
+            var point = new GridPoint(2, 1);
             Assert.AreEqual(false, map2[point]);
             map2[point] = true;
             Assert.AreEqual(true, map2[point]);
+        }
+
+        [TestMethod]
+        public void CreateMapFromSeparatedString()
+        {
+            List<string> valueMap = new List<string>
+            {
+                "1 2 3 10 -1",
+                "0.3 2 3 1.2 -3.1"
+            };
+
+            var map = Map<int>.ParseMap(valueMap, ' ', double.Parse);
+            CollectionAssert.AreEqual(new double[] { 1, 2, 3, 10, -1 }, map[0]);
+            CollectionAssert.AreEqual(new double[] { 0.3, 2, 3, 1.2, -3.1 }, map[1]);
+        }
+
+        [TestMethod]
+        public void IterateMap()
+        {
+            List<string> valueMap = new List<string>
+            {
+                "1 2 3 10 -1",
+                "0.3 2 3 1.2 -3.1"
+            };
+
+            var map = Map<int>.ParseMap(valueMap, ' ', double.Parse);
+            var coords = map.Coordinates().ToList();
+            int cur = 0;
+            for (int y = 0; y < map.Rows; y++)
+                for (int x = 0; x < map.Cols; x++)
+                {
+                    var coord = coords[cur];
+                    Assert.AreEqual(x, coord.X);
+                    Assert.AreEqual(y, coord.Y);
+                    cur++;
+                }
+
+            Assert.AreEqual(map.Rows * map.Cols, map.Coordinates().Count());
+        }
+
+        [TestMethod]
+        public void IterateFilterMap()
+        {
+            List<string> valueMap = new List<string>
+            {
+                "1 2 3 10 -1",
+                "0.3 2 3 1.2 -3.1"
+            };
+
+            var map = Map<int>.ParseMap(valueMap, ' ', double.Parse);
+            var coords = map.Coordinates((v) => v < 1 || v == 10).ToList();
+
+            Assert.AreEqual(4, coords.Count());
+            Assert.AreEqual(new GridPoint(3, 0), coords[0]);
+            Assert.AreEqual(new GridPoint(4, 0), coords[1]);
+            Assert.AreEqual(new GridPoint(0, 1), coords[2]);
+            Assert.AreEqual(new GridPoint(4, 1), coords[3]);
         }
     }
 }

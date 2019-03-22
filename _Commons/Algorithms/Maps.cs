@@ -50,6 +50,14 @@ namespace Algorithms
             return map;
         }
 
+        public static Map<T> ParseMap<T>(List<string> data, char sep, Func<string, T> parseField)
+        {
+            Map<T> map = new Map<T>(data.Count(), data.First().Length);
+            for (int i = 0; i < map.Rows; i++)
+                map[i] = data[i].Split(sep).Select(parseField).ToList();
+            return map;
+        }
+
         public GridPoint Shape
         {
             get { return new GridPoint(Cols, Rows); }
@@ -65,20 +73,16 @@ namespace Algorithms
             get { return this[0].Count; }
         }
 
-        public List<GridPoint> Coordinates(Func<T, bool> filter = null)
+        public IEnumerable<GridPoint> Coordinates(Func<T, bool> filter = null)
         {
-            filter = filter ?? new Func<T, bool>((c) => true);
-
-            List<GridPoint> res = new List<GridPoint>();
             for (int i = 0; i < Rows; i++)
             {
                 for (int i2 = 0; i2 < Cols; i2++)
                 {
-                    if (filter(this[i][i2]))
-                        res.Add(new GridPoint(i2, i));
+                    if (filter == null || filter(this[i][i2]))
+                        yield return new GridPoint(i2, i);
                 }
             }
-            return res;
         }
 
         public bool IsInside(GridPoint point)

@@ -11,54 +11,17 @@ namespace Algorithms
     // TODO propose a nice and clean and generic way to create graph for graph algorithms (composition, interface whatever)
     // below code is not good nor finished
     // TODO generyczny BFS, DFS, DIJKSTRA
-    // Oparty na funkcjach? (albo implementacji interfejsu)
-    // GetNeighbours(node), IsVisited(node), SetVisited(node), SetDistance(node, val)
 
-    public class Edge<TData> // bidirectional edge
+    
+    public class Edge<TData>
     {
-        public Node<TData> A;
-        public Node<TData> B;
-        public int Cost;
-
-        public Node<TData> End(Node<TData> from)
-        {
-            if (from == A)
-                return B;
-            else
-                return A;
-        }
-
-        public bool Contains(Node<TData> town)
-        {
-            return A == town || B == town;
-        }
-    }
-
-    public class Node<TData> : object
-    {
-        public int Id;
-        public TData Data;
-        public List<Edge<TData>> Edges;
+        public TData Target;
+        public double distance;
     }
 
     public class Graph<TData>
     {
-        public List<Edge<TData>> Edges;
-
-        public Edge<TData> FindEdgeBetween(Node<TData> a, Node<TData> b)
-        {
-            return Edges.FirstOrDefault(p => p.A == a && p.B == b) ?? Edges.FirstOrDefault(p => p.A == b && p.B == a);
-        }
-
-        public void PushEdgesToNodes(bool bidirectional)
-        {
-            foreach(var edge in Edges)
-            {
-                edge.A.Edges.Add(edge);
-                if(bidirectional)
-                    edge.B.Edges.Add(edge);
-            }
-        }
+        public Func<TData, IEnumerable<Edge<TData>>> GetNeighbours;
 
     }
 
@@ -96,7 +59,7 @@ namespace Algorithms
         public const int INF = 1000000000;
         public static int[,] Warshall(int n, List<Tuple<int,int,int>> edges)
         {
-// TODO dodaj zwracanie najkrótszych ścieżek i testy
+            // TODO dodaj zwracanie najkrótszych ścieżek i testy
             var res = new int[n, n];
 
             for (int i = 0; i < n; i++)
@@ -131,7 +94,31 @@ namespace Algorithms
 
             return res;
         }
+        // Prosty DFS 
 
+        /*
+         * int kolorBud = -1;
+            public void dfs2Bud(HotSpot hot, GridPoint start, int startbasin)
+            {
+                if (budyn[start] == kolorBud)
+                    return;
+                budyn[start] = kolorBud;
+                hot.points.Add(start);
+
+                foreach (var move in Moves.All4)
+                {
+                    var newpos = move.Move(start);
+                    if (mapa.IsInside(newpos))
+                    {
+                        if (mapa[newpos] == startbasin)
+                        {
+                            budyn[start] = kolorBud;
+                            dfs2Bud(hot, newpos, startbasin);
+                        }
+                    }
+                }
+            }
+         * */
 
         //6. Prosty BFS - lekki, bez potrzeby używania QuickGraph:
         //    private void UpdateStability(GameState state, Map<bool> edges, Map<int> stability, GridPoint start, int startStab)
@@ -166,7 +153,7 @@ namespace Algorithms
         //            }
         //        }
         //    }
-        
+
 
         //private bool Visited(GridPoint gp)
         //{
@@ -220,6 +207,6 @@ namespace Algorithms
         //    }
         //    return zysk;
         //}
-    
+
     }
 }
