@@ -87,7 +87,7 @@ public struct GridPoint : IComparable<GridPoint>
         Y = py;
     }
 
-    public GridPoint(Tuple<int,int> p)
+    public GridPoint(Tuple<int, int> p)
     {
         X = p.Item1;
         Y = p.Item2;
@@ -113,12 +113,12 @@ public struct GridPoint : IComparable<GridPoint>
         return base.GetHashCode();
     }
 
-    public static GridPoint operator +(GridPoint a, GridPoint b) 
+    public static GridPoint operator +(GridPoint a, GridPoint b)
     {
         return new GridPoint(a.X + b.X, a.Y + b.Y);
     }
 
-    public static GridPoint operator -(GridPoint a, GridPoint b) 
+    public static GridPoint operator -(GridPoint a, GridPoint b)
     {
         return new GridPoint(a.X - b.X, a.Y - b.Y);
     }
@@ -136,7 +136,7 @@ public struct GridPoint : IComparable<GridPoint>
 
     public int ManhattanDistance(int y, int x)
     {
-        return Math.Abs(X -x ) + Math.Abs(Y - y);
+        return Math.Abs(X - x) + Math.Abs(Y - y);
     }
 
     public int ManhattanDistance()
@@ -181,7 +181,7 @@ public class Point : IEquatable<Point>, IComparable<Point>
     {
         X = (double)px;
         Y = (double)py;
-        Quarter = CalculateQuarter(); 
+        Quarter = CalculateQuarter();
     }
 
     public Point(Tuple<double, double> p)
@@ -208,14 +208,14 @@ public class Point : IEquatable<Point>, IComparable<Point>
     //    y = XmlConvert.ToDouble(tokens[1]);
     //}
 
-    public static Point operator+(Point a, Point b) 
+    public static Point operator +(Point a, Point b)
     {
-        return new Point(a.X+b.X,a.Y+b.Y);
+        return new Point(a.X + b.X, a.Y + b.Y);
     }
 
-    public static Point operator -(Point a, Point b) 
+    public static Point operator -(Point a, Point b)
     {
-        return new Point(a.X-b.X,a.Y-b.Y);
+        return new Point(a.X - b.X, a.Y - b.Y);
     }
 
     public static Point operator +(Point a, double mult)
@@ -228,7 +228,7 @@ public class Point : IEquatable<Point>, IComparable<Point>
         return new Point(a.X - mult, a.Y - mult);
     }
 
-    public static Point operator*(Point a, double mult)
+    public static Point operator *(Point a, double mult)
     {
         return new Point(a.X * mult, a.Y * mult);
     }
@@ -270,7 +270,7 @@ public class Point : IEquatable<Point>, IComparable<Point>
 
     public override String ToString()
     {
-        return String.Format("x={0} y={1}", X, Y);
+        return String.Format("{0} {1}", X, Y);
     }
 
     public double Distance(Point b)
@@ -320,7 +320,7 @@ public class Point : IEquatable<Point>, IComparable<Point>
 
     private class SweepPoint<T>
     {
-        public readonly Point Point; 
+        public readonly Point Point;
         public readonly bool Start;
         public readonly T Data;
         public SweepPoint(Point a, bool b, T data)
@@ -352,7 +352,7 @@ public class Point : IEquatable<Point>, IComparable<Point>
         return visible;
     }
 
-    public IEnumerable<LineSegment> GetBestVisibleBrute(IEnumerable<LineSegment> segments, Func<LineSegment,double> bester)
+    public IEnumerable<LineSegment> GetBestVisibleBrute(IEnumerable<LineSegment> segments, Func<LineSegment, double> bester)
     {
         List<LineSegment> visible = new List<LineSegment>();
         double bestVal = double.MaxValue;
@@ -363,16 +363,14 @@ public class Point : IEquatable<Point>, IComparable<Point>
             var poteLine2 = new LineSegment(this, lineSeg.b);
 
             var newVal = bester(lineSeg);
-            if(bestVal > newVal)
-            { 
-
-            if (!(segments.Any(line => line != lineSeg && line.Intersects(poteLine1)) || segments.Any(line => line != lineSeg && line.Intersects(poteLine2))))
+            if (bestVal > newVal)
             {
-                visible.Add(lineSeg);
-                bestVal = Math.Min(bestVal, newVal);
+                if (!(segments.Any(line => line != lineSeg && line.Intersects(poteLine1)) || segments.Any(line => line != lineSeg && line.Intersects(poteLine2))))
+                {
+                    visible.Add(lineSeg);
+                    bestVal = Math.Min(bestVal, newVal);
+                }
             }
-
-        }
         }
         return visible;
     }
@@ -414,7 +412,7 @@ public class Point : IEquatable<Point>, IComparable<Point>
     }
 }
 
-public class Rectangle   
+public class Rectangle
 {
     public double Top, Bottom, Left, Right;
     public Rectangle(Point a, Point b)
@@ -473,7 +471,7 @@ public class Rectangle
 
     public override string ToString()
     {
-        return Left + " " + Top + " " + Right + " " + Bottom; 
+        return Left + " " + Top + " " + Right + " " + Bottom;
     }
 }
 
@@ -561,7 +559,7 @@ public class Polygon
             this.points.Reverse();
     }
 
-    public int n
+    public int N
     {
         get { return points.Count; }
     }
@@ -569,9 +567,9 @@ public class Polygon
     public List<LineSegment> GetLineSegments()
     {
         List<LineSegment> lines = new List<LineSegment>();
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < N; i++)
         {
-            var next = (i + 1) % n;
+            var next = (i + 1) % N;
             lines.Add(new LineSegment(points[i], points[next]));
         }
         return lines;

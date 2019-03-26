@@ -1,11 +1,11 @@
 @ECHO OFF
 
-set name=probe
+set name=level6_
 setlocal enableDelayedExpansion
 
 for /L %%i in (0,1,10) do (
     set "n=00%%i"
-    set "NAME=%name%!n:~-2!
+    set "NAME=%name%!n:~-1!
     if exist input\!NAME!.in ( 
         echo odpalone... !NAME!
         call Run.bat !NAME!
