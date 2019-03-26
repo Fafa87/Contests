@@ -93,6 +93,11 @@ public struct GridPoint : IComparable<GridPoint>
         Y = p.Item2;
     }
 
+    public Point ToPoint()
+    {
+        return new Point(X, Y);
+    }
+
     public static bool operator ==(GridPoint x, GridPoint y)
     {
         return x.Equals(y);
@@ -187,6 +192,14 @@ public class Point : IEquatable<Point>, IComparable<Point>
     public Point(Tuple<double, double> p)
         : this(p.Item1, p.Item2)
     {
+    }
+
+    public GridPoint ToGridPoint(bool truncate)
+    {
+        if (truncate)
+            return new GridPoint((int)X, (int)Y);
+        else
+            return new GridPoint((int)(X + 0.5), (int)(Y + 0.5));
     }
 
     public override int GetHashCode()

@@ -98,5 +98,34 @@ namespace AlgorithmsTest
             Assert.AreEqual(new GridPoint(0, 1), coords[2]);
             Assert.AreEqual(new GridPoint(4, 1), coords[3]);
         }
+
+        [TestMethod]
+        public void CenteredBoxTest()
+        {
+            var point = new Point(1.2, 3.6).ToGridPoint(true);
+
+            Assert.AreEqual(new GridPoint(1, 3), Moves.CenteredBox(point, 0, 0).Single());
+
+            var box = Moves.CenteredBox(point, 1, 2);
+            Assert.AreEqual(15, box.Count());
+            Assert.AreEqual(new GridPoint(-1, 2), box[0]);
+            Assert.AreEqual(new GridPoint(0, 2), box[1]);
+            Assert.AreEqual(new GridPoint(1, 2), box[2]);
+            Assert.AreEqual(new GridPoint(2, 2), box[3]);
+            Assert.AreEqual(new GridPoint(3, 2), box[4]);
+            Assert.AreEqual(new GridPoint(-1, 3), box[5]);
+            Assert.AreEqual(new GridPoint(1, 3), box[7]);
+            Assert.AreEqual(new GridPoint(3, 4), box[14]);
+        }
+
+        [TestMethod]
+        public void ConvertPointToGridPoint()
+        {
+            var point = new Point(1.2, 3.6);
+            Assert.AreEqual(new GridPoint(1, 4), point.ToGridPoint(false));
+            Assert.AreEqual(new GridPoint(1, 3), point.ToGridPoint(true));
+
+            Assert.AreEqual(new Point(1, 4), point.ToGridPoint(false).ToPoint());
+        }
     }
 }

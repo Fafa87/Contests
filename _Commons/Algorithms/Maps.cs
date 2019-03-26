@@ -185,5 +185,14 @@ namespace Algorithms
                     throw new ArgumentException("Unsupported move: " + d);
             }
         }
+
+        public static List<GridPoint> CenteredBox(this GridPoint point, int sy, int sx)
+        {
+            var res = new List<GridPoint>();
+            for (int i = -sy; i <= sy; i++)
+                for (int i2 = -sx; i2 <= sx; i2++)
+                    res.Add(new GridPoint(point.X + i2, point.Y + i));
+            return res;
+        }
     }
 }
