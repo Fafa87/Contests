@@ -119,65 +119,68 @@ namespace Algorithms
             )));
         }
     }
-
-    public enum Moves4
-    {
-        Up, Left, Down, Right
-    }
-
+    
     public enum Moves8
     {
-        UpLeft, Up, UpRight,
-        Left,       Right,
-        DownLeft, Down, DownRight
+        UpLeft = 0,   Up = 1,   UpRight = 2,
+        Left = 3,               Right = 4,
+        DownLeft = 5, Down = 6, DownRight = 7
     }
 
     public static class Moves
     {
-        public static Moves4[] All4 = new[] { Moves4.Up, Moves4.Left, Moves4.Down, Moves4.Right };
+        public static Moves8[] All4 = new[] { Moves8.Up, Moves8.Left, Moves8.Down, Moves8.Right };
         public static Moves8[] All8 = new[] { 
             Moves8.UpLeft,   Moves8.Up,   Moves8.UpRight,
             Moves8.Left,                  Moves8.Right,
             Moves8.DownLeft, Moves8.Down, Moves8.DownRight
         };
 
-        public static GridPoint Move(this Moves4 d, GridPoint point)
+        public static Point Move(this Moves8 d, Point point, int ile = 1)
         {
             switch (d)
             {
-                case Moves4.Up:
-                    return new GridPoint(point.X, point.Y - 1);
-                case Moves4.Down:
-                    return new GridPoint(point.X, point.Y + 1);
-                case Moves4.Left:
-                    return new GridPoint(point.X - 1, point.Y);
-                case Moves4.Right:
-                    return new GridPoint(point.X + 1, point.Y);
+                case Moves8.Up:
+                    return new Point(point.X, point.Y - ile);
+                case Moves8.Down:
+                    return new Point(point.X, point.Y + ile);
+                case Moves8.Left:
+                    return new Point(point.X - ile, point.Y);
+                case Moves8.Right:
+                    return new Point(point.X + ile, point.Y);
+                case Moves8.UpLeft:
+                    return new Point(point.X - ile, point.Y - ile);
+                case Moves8.UpRight:
+                    return new Point(point.X + ile, point.Y - ile);
+                case Moves8.DownLeft:
+                    return new Point(point.X - ile, point.Y + ile);
+                case Moves8.DownRight:
+                    return new Point(point.X + ile, point.Y + ile);
                 default:
                     throw new ArgumentException("Unsupported move: " + d);
             }
         }
 
-        public static GridPoint Move(this Moves8 d, GridPoint point)
+        public static GridPoint Move(this Moves8 d, GridPoint point, int ile = 1)
         {
             switch (d)
             {
                 case Moves8.Up:
-                    return new GridPoint(point.X, point.Y - 1);
+                    return new GridPoint(point.X, point.Y - ile);
                 case Moves8.Down:
-                    return new GridPoint(point.X, point.Y + 1);
+                    return new GridPoint(point.X, point.Y + ile);
                 case Moves8.Left:
-                    return new GridPoint(point.X - 1, point.Y);
+                    return new GridPoint(point.X - ile, point.Y);
                 case Moves8.Right:
-                    return new GridPoint(point.X + 1, point.Y);
+                    return new GridPoint(point.X + ile, point.Y);
                 case Moves8.UpLeft:
-                    return new GridPoint(point.X - 1, point.Y - 1);
+                    return new GridPoint(point.X - ile, point.Y - ile);
                 case Moves8.UpRight:
-                    return new GridPoint(point.X + 1, point.Y - 1);
+                    return new GridPoint(point.X + ile, point.Y - ile);
                 case Moves8.DownLeft:
-                    return new GridPoint(point.X - 1, point.Y + 1);
+                    return new GridPoint(point.X - ile, point.Y + ile);
                 case Moves8.DownRight:
-                    return new GridPoint(point.X + 1, point.Y + 1);
+                    return new GridPoint(point.X + ile, point.Y + ile);
                 default:
                     throw new ArgumentException("Unsupported move: " + d);
             }
