@@ -39,7 +39,7 @@ namespace Deadline
 
         public static IEnumerable<T> RandomizeWeighted<T>(this IEnumerable<T> source, Func<float> weigth)
         {
-            throw new NotImplementedException("This should allow to randomize but without ignoring the value of the sample.")
+            throw new NotImplementedException("This should allow to randomize but without ignoring the value of the sample.");
         }
     }
 
