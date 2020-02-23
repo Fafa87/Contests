@@ -11,11 +11,15 @@ xcopy DeadlineTest zip_dir\DeadlineTest /i /E
 xcopy Clients zip_dir\Clients /i /E
 
 @REM Remove unnecessary files
-del zip_dir\_Graph\QuickGraphDoc.chm
-del zip_dir\*.exe
-del zip_dir\*.bat
-del zip_dir\*.pdf
-del zip_dir\*.pdb
+cd zip_dir
+del _Graph\QuickGraphDoc.chm
+del *.exe
+del *.bat
+del *.pdf
+del *.pdb
+FOR /d /r . %%d IN (bin) DO @IF EXIST "%%d" rd /s /q "%%d"
+FOR /d /r . %%d IN (obj) DO @IF EXIST "%%d" rd /s /q "%%d"
+cd ..
 
 powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::CreateFromDirectory('zip_dir', 'zip_solution.zip'); }"
 
